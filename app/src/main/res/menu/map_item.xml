@@ -7,5 +7,26 @@
         android:id="@+id/item_location"
         android:title="我的位置"
         />
+    <item
+        app:showAsAction="never"
+        android:id="@+id/item_map_model_normal"
+        android:title="普通模式"
+        />
+    <item
+        app:showAsAction="never"
+        android:id="@+id/item_map_model_follow"
+        android:title="根随模式"
+        />
+    <item
+        app:showAsAction="never"
+        android:id="@+id/item_map_model_compass"
+        android:title="罗盘模式"
+        />
+    <item
+        android:title="标识物"
+        app:showAsAction="never"
+        android:id="@+id/item_map_obstacle"
+        />
+
 
 </menu>

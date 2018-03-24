@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -19,13 +20,18 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.example.administrator.protage.baidumap.MapInfo;
 import com.example.administrator.protage.sensor.MyOrientationListener;
 import com.example.administrator.protage.util.L;
+import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
+
+import java.util.List;
 
 /**
  * @author  alan
@@ -42,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFirstIn = true;
     private double mLatitude;
     private double mLongtitude;
-    private MyLocationConfiguration.LocationMode mLocationMode;
+    private LocationMode mLocationMode;
 
     private BaiduMap mBaiduMap;
     private BitmapDescriptor mIconLocation;
 
     private MyOrientationListener orientationListener;
     private float currentX;
+    //标识物
+    private BitmapDescriptor mMarker;
+    private RelativeLayout mMarkerLy;
 
 
     @Override
@@ -58,9 +67,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         initLocation();
-        initEvent();
+        initMarker();
     }
-
 
     /**
      * 设置地图
@@ -77,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initLocation() {
 
-        mLocationMode = MyLocationConfiguration.LocationMode.NORMAL;
+        mLocationMode = LocationMode.NORMAL;
         mLocationClient = new LocationClient(this);
         locationListener = new MyLocationListener();
         //没有将我的位置标识出来
@@ -104,7 +112,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void initEvent() {
+    private void initMarker()
+    {
+        mMarker = BitmapDescriptorFactory.fromResource(R.drawable.maker);
+        mMarkerLy = findViewById(R.id.id_maker_ly);
     }
 
     private class MyLocationListener implements BDLocationListener{
@@ -200,6 +211,18 @@ public class MainActivity extends AppCompatActivity {
                 L.e("item location");
                 centerToMyLocation();
                 break;
+            case R.id.item_map_model_normal:
+                mLocationMode = LocationMode.NORMAL;
+                break;
+            case R.id.item_map_model_follow:
+                mLocationMode = LocationMode.FOLLOWING;
+                break;
+            case R.id.item_map_model_compass:
+                mLocationMode = LocationMode.COMPASS;
+                break;
+            case R.id.item_map_obstacle:
+                addOverlays(MapInfo.infos);
+                break;
             default:
                 break;
         }
@@ -216,5 +239,29 @@ public class MainActivity extends AppCompatActivity {
         LatLng latLng = new LatLng(mLatitude, mLongtitude);
         MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
         mBaiduMap.animateMapStatus(msu);
+    }
+
+    private void addOverlays(List<MapInfo> infos)
+    {
+        mBaiduMap.clear();
+        LatLng latLng = null;
+        Marker marker = null;
+        OverlayOptions options;
+        for (MapInfo info : infos)
+        {
+
+            latLng = new LatLng(info.getLatitude(), info.getLongitude());
+
+            options = new MarkerOptions().position(latLng).icon(mMarker)
+                    .zIndex(5);
+            marker = (Marker) mBaiduMap.addOverlay(options);
+            Bundle arg0 = new Bundle();
+            arg0.putSerializable("info", info);
+            marker.setExtraInfo(arg0);
+        }
+
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
+        mBaiduMap.setMapStatus(msu);
+
     }
 }
