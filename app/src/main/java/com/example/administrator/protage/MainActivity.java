@@ -2,13 +2,19 @@ package com.example.administrator.protage;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
+import com.example.administrator.protage.util.L;
 
 /**
  * @author  alan
- * 
+ * 1.定位功能，定位自己的位置
+ *  (1)使用LocationClient，和BDLocationListener
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -43,4 +49,24 @@ public class MainActivity extends AppCompatActivity {
         mMapView.onPause();
     }
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.map_item,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_location:
+                L.e("item location");
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
