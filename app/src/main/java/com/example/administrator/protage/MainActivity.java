@@ -2,13 +2,25 @@ package com.example.administrator.protage;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.protage.util.L;
 
 /**
@@ -21,23 +33,88 @@ public class MainActivity extends AppCompatActivity {
 
     private MapView mMapView;
 
+    private LocationClient mLocationClient;
+    private MyLocationListener locationListener;
+    private boolean isFirstIn = true;
+    private double mLatitude;
+    private double mLongtitude;
+
+    private BaiduMap mBaiduMap;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+
         mMapView = findViewById(R.id.id_mapView);
+        mBaiduMap = mMapView.getMap();
+
+        initLocation();
+    }
+
+    /**
+     * 初始化位置设置
+     */
+    private void initLocation() {
+
+        mLocationClient = new LocationClient(this);
+        locationListener = new MyLocationListener();
+        //没有将我的位置标识出来
+        mLocationClient.registerLocationListener(locationListener);
+
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("bd0911");
+        option.setIsNeedAddress(true);
+        option.setOpenGps(true);
+        option.setScanSpan(1000);
+
+        mLocationClient.setLocOption(option);
+        mLocationClient.start();
+    }
+
+
+    private class MyLocationListener implements BDLocationListener{
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            L.e(location.getLatitude()+"------"+location.getLongitude());
+            MyLocationData data = new MyLocationData.Builder()
+                    .accuracy(location.getRadius())
+                    .latitude(location.getLatitude())
+                    .longitude(location.getLongitude())
+                    .build();
+            mBaiduMap.setMyLocationData(data);
+
+            mLatitude = location.getLatitude();
+            mLongtitude = location.getLongitude();
+
+            if (isFirstIn)
+            {
+                LatLng latLng = new LatLng(location.getLatitude(),
+                        location.getLongitude());
+                MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
+                mBaiduMap.animateMapStatus(msu);
+                isFirstIn = false;
+
+                Toast.makeText(MainActivity.this, location.getAddrStr(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
+        mLocationClient.unRegisterLocationListener(locationListener);
         mMapView.onDestroy();
     }
     @Override
     protected void onResume() {
+
         super.onResume();
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
         mMapView.onResume();
@@ -48,8 +125,6 @@ public class MainActivity extends AppCompatActivity {
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,10 +138,23 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.item_location:
                 L.e("item location");
+                centerToMyLocation();
                 break;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 开始定位
+     * 1.得到所在位置的Latitude和Longtitude
+     *
+     */
+    private void centerToMyLocation()
+    {
+        LatLng latLng = new LatLng(mLatitude, mLongtitude);
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
+        mBaiduMap.animateMapStatus(msu);
     }
 }
