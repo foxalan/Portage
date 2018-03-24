@@ -2,7 +2,6 @@ package com.example.administrator.protage;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +24,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.example.administrator.protage.sensor.MyOrientationListener;
 import com.example.administrator.protage.util.L;
 
 /**
@@ -47,17 +47,20 @@ public class MainActivity extends AppCompatActivity {
     private BaiduMap mBaiduMap;
     private BitmapDescriptor mIconLocation;
 
+    private MyOrientationListener orientationListener;
+    private float currentX;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
-
         initView();
         initLocation();
+        initEvent();
     }
+
 
     /**
      * 设置地图
@@ -79,28 +82,38 @@ public class MainActivity extends AppCompatActivity {
         locationListener = new MyLocationListener();
         //没有将我的位置标识出来
         mLocationClient.registerLocationListener(locationListener);
-
         LocationClientOption option = new LocationClientOption();
         option.setCoorType("bd09ll");
         option.setIsNeedAddress(true);
         option.setOpenGps(true);
         option.setScanSpan(1000);
-
         //设置图标
         mIconLocation = BitmapDescriptorFactory
                 .fromResource(R.drawable.navi_map_gps_locked);
+        //设置传感器
+        orientationListener = new MyOrientationListener(this);
+        orientationListener.start();
+        orientationListener.setOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
+            @Override
+            public void onOrientationChanged(float x) {
+                currentX =x;
+            }
+        });
 
         mLocationClient.setLocOption(option);
-        mLocationClient.start();
     }
 
+
+    private void initEvent() {
+    }
 
     private class MyLocationListener implements BDLocationListener{
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            L.e(location.getLatitude()+"------"+location.getLongitude());
+            L.e(location.getLatitude()+"------"+location.getLongitude()+"===="+currentX);
             MyLocationData data = new MyLocationData.Builder()
+                    .direction(currentX)
                     .accuracy(location.getRadius())
                     .latitude(location.getLatitude())
                     .longitude(location.getLongitude())
@@ -114,14 +127,14 @@ public class MainActivity extends AppCompatActivity {
             mLatitude = location.getLatitude();
             mLongtitude = location.getLongitude();
 
-            //定义Maker坐标点
-            LatLng point = new LatLng(mLatitude,mLongtitude);
-            //构建MarkerOption，用于在地图上添加Marker
-            OverlayOptions option = new MarkerOptions()
-                    .position(point)
-                    .icon(mIconLocation);
-            //在地图上添加Marker，并显示
-            mBaiduMap.addOverlay(option);
+//            //定义Maker坐标点
+//            LatLng point = new LatLng(mLatitude,mLongtitude);
+//            //构建MarkerOption，用于在地图上添加Marker
+//            OverlayOptions option = new MarkerOptions()
+//                    .position(point)
+//                    .icon(mIconLocation);
+//            //在地图上添加Marker，并显示
+//            mBaiduMap.addOverlay(option);
 
             if (isFirstIn)
             {
@@ -137,6 +150,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mBaiduMap.setMyLocationEnabled(true);
+        mLocationClient.start();
+        orientationListener.start();
+    }
 
     @Override
     protected void onResume() {
@@ -150,6 +170,12 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        orientationListener.stop();
     }
 
     @Override
