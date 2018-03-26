@@ -23,6 +23,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -48,7 +49,12 @@ import java.util.List;
  *  (2)重写onSensorChanged方法，将X坐标通过回调传出
  *  (3)利用定位功能中的一秒刷新，将值给direction,进行重新绘制
  * 3.自定义的标识物
- *   (1)
+ *   (1)设置标识物的坐标和显示图标
+ *   (2)将信息坐标传递给Map，Map将保存所有信息，用于点击事件
+ * 4.标识物的点击处理
+ *   (1)setOnMarkerClickListener
+ *
+ *
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MyOrientationListener orientationListener;
     private float currentX;
-    //标识物
+
     private BitmapDescriptor mMarker;
     private RelativeLayout mMarkerLy;
 
@@ -135,6 +141,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+
+        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener(){
+
+			@Override
+			public boolean onMapPoiClick(MapPoi arg0)
+			{
+				return false;
+			}
+
+			@Override
+			public void onMapClick(LatLng arg0)
+			{
+				mMarkerLy.setVisibility(View.GONE);
+				mBaiduMap.hideInfoWindow();
+			}
+		});
+
+
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
         @Override
         public boolean onMarkerClick(Marker marker)
