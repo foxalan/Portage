@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +35,12 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeOption;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.administrator.protage.baidumap.MapInfo;
 import com.example.administrator.protage.sensor.MyOrientationListener;
 import com.example.administrator.protage.util.L;
@@ -57,7 +65,7 @@ import java.util.List;
  *
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResultListener {
 
     private MapView mMapView;
 
@@ -77,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
     private BitmapDescriptor mMarker;
     private RelativeLayout mMarkerLy;
 
+    /**
+     * 定位到具体位置
+     * @param savedInstanceState
+     */
+    private Button mBtSearch;
+    private EditText mEtCity;
+    private EditText mEtAddress;
+    private GeoCoder mSearch = null;
+    // 搜索模块，也可去掉地图模块独立使用
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         initLocation();
         initMarker();
         initEvent();
+        initSearch();
     }
 
     /**
@@ -94,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private void initView() {
+        mBtSearch =findViewById(R.id.bt_search);
+        mEtAddress =findViewById(R.id.et_address);
+        mEtCity = findViewById(R.id.et_city);
         mMapView = findViewById(R.id.id_mapView);
         mBaiduMap = mMapView.getMap();
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
@@ -132,6 +154,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * 初始化定位设置
+     */
+    private void initSearch() {
+        // 初始化搜索模块，注册事件监听
+        mSearch = GeoCoder.newInstance();
+        mSearch.setOnGetGeoCodeResultListener(this);
+    }
+
+    /**
      * 设置标识物的图标
      */
     private void initMarker()
@@ -141,6 +172,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+
+        mBtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String city = mEtCity.getText().toString();
+                String address = mEtAddress.getText().toString();
+                if (!"".equals(city)&&!"".equals(address)){
+                    // Geo搜索
+                    mSearch.geocode(new GeoCodeOption().city(city)
+                    .address(address));
+                }
+            }
+        });
 
         mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener(){
 
@@ -193,6 +237,33 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     });
+    }
+
+    /**
+     *定位到具体位置
+     */
+    @Override
+    public void onGetGeoCodeResult(GeoCodeResult result) {
+        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(MainActivity.this, "抱歉，未能找到结果", Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        mBaiduMap.clear();
+        mBaiduMap.addOverlay(new MarkerOptions().position(result.getLocation())
+                .icon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.icon_marka)));
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(result
+                .getLocation()));
+        String strInfo = String.format("纬度：%f 经度：%f",
+                result.getLocation().latitude, result.getLocation().longitude);
+        Toast.makeText(MainActivity.this, strInfo, Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
+
     }
 
     private class MyLocationListener implements BDLocationListener{
@@ -272,6 +343,7 @@ public class MainActivity extends AppCompatActivity {
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mLocationClient.unRegisterLocationListener(locationListener);
         mMapView.onDestroy();
+        mSearch.destroy();
     }
 
     @Override

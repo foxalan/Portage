@@ -87,6 +87,39 @@
         </RelativeLayout>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:background="@color/colorAccent"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <EditText
+            android:hint="城市"
+            android:layout_margin="5dp"
+            android:id="@+id/et_city"
+            android:layout_alignParentLeft="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <EditText
+
+            android:layout_toRightOf="@id/et_city"
+            android:hint="详细地址"
+            android:layout_margin="5dp"
+            android:id="@+id/et_address"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/bt_search"
+            android:text="查找"
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
 
 
 </RelativeLayout>
