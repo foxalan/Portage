@@ -1,11 +1,16 @@
 package com.example.administrator.protage;
 
+import android.graphics.Color;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -17,6 +22,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -37,6 +43,12 @@ import java.util.List;
  * @author  alan
  * 1.定位功能，定位自己的位置
  *  (1)使用LocationClient，和BDLocationListener
+ * 2.方向识别功能
+ *  (1)建立传感器，MyOrientationListener,创建Sensor,SensorManager
+ *  (2)重写onSensorChanged方法，将X坐标通过回调传出
+ *  (3)利用定位功能中的一秒刷新，将值给direction,进行重新绘制
+ * 3.自定义的标识物
+ *   (1)
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -68,11 +80,13 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initLocation();
         initMarker();
+        initEvent();
     }
 
     /**
      * 设置地图
      */
+
     private void initView() {
         mMapView = findViewById(R.id.id_mapView);
         mBaiduMap = mMapView.getMap();
@@ -111,11 +125,50 @@ public class MainActivity extends AppCompatActivity {
         mLocationClient.setLocOption(option);
     }
 
-
+    /**
+     * 设置标识物的图标
+     */
     private void initMarker()
     {
         mMarker = BitmapDescriptorFactory.fromResource(R.drawable.maker);
         mMarkerLy = findViewById(R.id.id_maker_ly);
+    }
+
+    private void initEvent() {
+        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker marker)
+        {
+            L.e("Marker Click");
+            Bundle extraInfo = marker.getExtraInfo();
+            MapInfo info = (MapInfo) extraInfo.getSerializable("info");
+            ImageView iv =  mMarkerLy.findViewById(R.id.id_info_img);
+            TextView distance =  mMarkerLy.findViewById(R.id.id_info_distance);
+            TextView name =  mMarkerLy.findViewById(R.id.id_info_name);
+            TextView zan =  mMarkerLy.findViewById(R.id.id_info_zan);
+            iv.setImageResource(info.getImgId());
+            distance.setText(info.getDistance());
+            name.setText(info.getName());
+            zan.setText(info.getZan() + "");
+
+            InfoWindow infoWindow;
+            TextView tv = new TextView(MainActivity.this);
+            tv.setBackgroundResource(R.drawable.location_tips);
+            tv.setPadding(30, 20, 30, 50);
+            tv.setText(info.getName());
+            tv.setTextColor(Color.parseColor("#ffffff"));
+
+            final LatLng latLng = marker.getPosition();
+            Point p = mBaiduMap.getProjection().toScreenLocation(latLng);
+            p.y -= 47;
+            LatLng ll = mBaiduMap.getProjection().fromScreenLocation(p);
+
+            infoWindow = new InfoWindow(tv, ll,0);
+            mBaiduMap.showInfoWindow(infoWindow);
+            mMarkerLy.setVisibility(View.VISIBLE);
+            return true;
+        }
+    });
     }
 
     private class MyLocationListener implements BDLocationListener{
