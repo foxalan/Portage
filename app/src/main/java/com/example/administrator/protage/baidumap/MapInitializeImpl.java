@@ -14,13 +14,18 @@ import com.baidu.mapapi.map.MapView;
  * Issue
  */
 
-public class MapInitalizeimpl implements IMapInitialize {
+public class MapInitializeImpl implements IMapInitialize {
+
+
+
+
 
     @Override
     public void initBaiduMap(MapView mapView, BaiduMap baiduMap) {
         baiduMap = mapView.getMap();
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
         baiduMap.setMapStatus(msu);
+        baiduMap.setMyLocationEnabled(true);
     }
 
     @Override

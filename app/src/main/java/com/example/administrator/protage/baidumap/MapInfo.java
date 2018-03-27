@@ -106,6 +106,4 @@ public class MapInfo implements Serializable
         this.zan = zan;
     }
 
-
-
 }

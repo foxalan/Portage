@@ -14,8 +14,9 @@ import com.baidu.mapapi.map.MapView;
 public interface IMapInitialize {
 
     /**
-     * 初始化地图设置
+     * 初始化地图操作
      * @param mapView
+     * @param baiduMap
      */
     void initBaiduMap(MapView mapView, BaiduMap baiduMap);
 

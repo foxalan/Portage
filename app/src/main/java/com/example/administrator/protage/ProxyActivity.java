@@ -12,8 +12,6 @@ import com.example.fox_core.BaseActivity;
 
 public class ProxyActivity extends BaseActivity {
 
-
-
     @Override
     public Object getActivityLayout() {
         return R.layout.activity_proxy;
