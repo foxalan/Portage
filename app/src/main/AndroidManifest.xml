@@ -39,6 +39,7 @@
 
 
     <application
+        android:name=".application.FoxApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -50,15 +51,13 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="amqSt3QpwdXXIgCYVgsyovAGr8ALX9uu" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".ProxyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
 
         <service
             android:name="com.baidu.location.f"

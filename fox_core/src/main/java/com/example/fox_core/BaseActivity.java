@@ -38,6 +38,10 @@ public abstract class BaseActivity extends AppCompatActivity{
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
+
         if (getActivityLayout() instanceof View){
             View view = (View) getActivityLayout();
             setContentView(view);

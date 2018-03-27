@@ -2,6 +2,8 @@ package com.example.administrator.protage.application;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
+
 /**
  * @Author Alan
  * Date 2018/3/27 0027
@@ -14,5 +16,6 @@ public class FoxApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SDKInitializer.initialize(getApplicationContext());
     }
 }
