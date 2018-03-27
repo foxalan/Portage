@@ -46,7 +46,7 @@ public class BaiduMapFragment extends BaseFragment {
 
         mapInitializeImpl = new MapInitializeImpl();
         mapInitializeImpl.initLocationClient(mLocationClient);
-        mapInitializeImpl.initBaiduMap(mMapView, mBaiduMap);
+        mapInitializeImpl.initBaiduMap(mBaiduMap);
     }
 
     @Override

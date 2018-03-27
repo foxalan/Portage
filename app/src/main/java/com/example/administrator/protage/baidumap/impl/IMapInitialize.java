@@ -2,7 +2,6 @@ package com.example.administrator.protage.baidumap.impl;
 
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.MapView;
 
 /**
  * @Author Alan
@@ -15,10 +14,9 @@ public interface IMapInitialize {
 
     /**
      * 初始化地图操作
-     * @param mapView
      * @param baiduMap
      */
-    void initBaiduMap(MapView mapView, BaiduMap baiduMap);
+    void initBaiduMap( BaiduMap baiduMap);
 
     /**
      * 初始化定位操作

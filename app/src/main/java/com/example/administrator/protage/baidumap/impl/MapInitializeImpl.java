@@ -6,7 +6,6 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.protage.util.L;
@@ -26,11 +25,10 @@ public class MapInitializeImpl implements IMapInitialize, IMapOperate {
     private double longitude;
 
     public MapInitializeImpl() {
-
     }
 
     @Override
-    public void initBaiduMap(MapView mapView, BaiduMap baiduMap) {
+    public void initBaiduMap(BaiduMap baiduMap) {
 
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
         baiduMap.setMapStatus(msu);
@@ -53,7 +51,6 @@ public class MapInitializeImpl implements IMapInitialize, IMapOperate {
 
         L.e(location.getLatitude() + "------" + location.getLongitude() + "====");
         MyLocationData data = new MyLocationData.Builder()
-
                 .accuracy(location.getRadius())
                 .latitude(location.getLatitude())
                 .longitude(location.getLongitude())
@@ -70,6 +67,7 @@ public class MapInitializeImpl implements IMapInitialize, IMapOperate {
             isFirst = false;
         }
     }
+
 
     @Override
     public void centerToMyLocation(BaiduMap baiduMap) {

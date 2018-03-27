@@ -1,6 +1,6 @@
 package com.example.administrator.protage.baidumap.impl;
 
-import android.location.Location;
+
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
