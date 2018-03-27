@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Portage.iml" filepath="$PROJECT_DIR$/Portage.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fox_core/fox_core.iml" filepath="$PROJECT_DIR$/fox_core/fox_core.iml" />
       <module fileurl="file://$PROJECT_DIR$/fox_ui/fox_ui.iml" filepath="$PROJECT_DIR$/fox_ui/fox_ui.iml" />
     </modules>
   </component>
