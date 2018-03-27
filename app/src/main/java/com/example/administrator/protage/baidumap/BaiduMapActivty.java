@@ -13,6 +13,16 @@ import com.example.administrator.protage.base.BaseActivity;
 public class BaiduMapActivty extends BaseActivity{
 
     @Override
+    public Object getActivityLayout() {
+        return null;
+    }
+
+    @Override
+    public void onBindView() {
+
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
