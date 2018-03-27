@@ -1,7 +1,8 @@
-package com.example.fox_ui;
+package com.example.administrator.protage.baidumap;
 
 import android.view.View;
 
+import com.example.administrator.protage.R;
 import com.example.fox_core.BaseFragment;
 
 /**
@@ -11,11 +12,13 @@ import com.example.fox_core.BaseFragment;
  * Issue
  */
 
-public class BaiduMapFragment extends BaseFragment{
+public class BaiduMapFragment extends BaseFragment {
+
+    
 
     @Override
     public Object getFragmentLayout() {
-        return null;
+        return R.layout.fragment_baidu_map;
     }
 
     @Override

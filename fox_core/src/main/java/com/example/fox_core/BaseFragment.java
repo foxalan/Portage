@@ -1,4 +1,4 @@
-package com.example.administrator.protage.base;
+package com.example.fox_core;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
