@@ -2,18 +2,14 @@ package com.example.administrator.protage.baidumap;
 
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.protage.R;
-import com.example.administrator.protage.util.L;
+import com.example.administrator.protage.baidumap.impl.MapInitializeImpl;
 import com.example.fox_core.BaseFragment;
 
 /**
@@ -30,7 +26,6 @@ public class BaiduMapFragment extends BaseFragment {
 
     private RelativeLayout mMarkerLy;
     private MapInitializeImpl mapInitializeImpl;
-    private boolean isFirstIn = false;
 
     private LocationClient mLocationClient;
     private MyLocationListener locationListener;

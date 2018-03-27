@@ -1,7 +1,4 @@
-package com.example.administrator.protage.baidumap;
-
-import android.location.Location;
-import android.widget.Toast;
+package com.example.administrator.protage.baidumap.impl;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
@@ -10,7 +7,6 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.protage.util.L;
@@ -19,13 +15,17 @@ import com.example.administrator.protage.util.L;
 /**
  * @Author Alan
  * Date 2018/3/27 0027
- * Function
+ * Function 百度地图的实现类
  * Issue
  */
 
-public class MapInitializeImpl implements IMapInitialize ,IMapOperate{
+public class MapInitializeImpl implements IMapInitialize, IMapOperate {
 
-    public MapInitializeImpl(){
+    private boolean isFirst = true;
+    private double latitude;
+    private double longitude;
+
+    public MapInitializeImpl() {
 
     }
 
@@ -48,26 +48,33 @@ public class MapInitializeImpl implements IMapInitialize ,IMapOperate{
         locationClient.setLocOption(option);
     }
 
-
     @Override
     public void location(BaiduMap baiduMap, BDLocation location) {
 
-           L.e(location.getLatitude()+"------"+location.getLongitude()+"====");
-           MyLocationData data = new MyLocationData.Builder()
+        L.e(location.getLatitude() + "------" + location.getLongitude() + "====");
+        MyLocationData data = new MyLocationData.Builder()
 
-                    .accuracy(location.getRadius())
-                    .latitude(location.getLatitude())
-                    .longitude(location.getLongitude())
-                    .build();
-            baiduMap.setMyLocationData(data);
+                .accuracy(location.getRadius())
+                .latitude(location.getLatitude())
+                .longitude(location.getLongitude())
+                .build();
+        baiduMap.setMyLocationData(data);
 
-//            MyLocationConfiguration config = new MyLocationConfiguration(
-//                    mLocationMode, true, mIconLocation);
-//            mBaiduMap.setMyLocationConfigeration(config);
-
+        if (isFirst) {
             LatLng latLng = new LatLng(location.getLatitude(),
                     location.getLongitude());
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
             MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
             baiduMap.animateMapStatus(msu);
+            isFirst = false;
+        }
+    }
+
+    @Override
+    public void centerToMyLocation(BaiduMap baiduMap) {
+        LatLng latLng = new LatLng(latitude, longitude);
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
+        baiduMap.animateMapStatus(msu);
     }
 }

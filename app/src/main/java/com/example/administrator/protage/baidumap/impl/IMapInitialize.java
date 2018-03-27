@@ -1,4 +1,4 @@
-package com.example.administrator.protage.baidumap;
+package com.example.administrator.protage.baidumap.impl;
 
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.map.BaiduMap;

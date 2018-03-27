@@ -48,7 +48,6 @@ public class MyOrientationListener implements SensorEventListener {
 
     public void stop(){
         mSensorManager.unregisterListener(this);
-
     }
 
     @Override
@@ -57,7 +56,6 @@ public class MyOrientationListener implements SensorEventListener {
         if (event.sensor.getType() == Sensor.TYPE_ORIENTATION)
         {
             float x = event.values[SensorManager.DATA_X];
-
             if (Math.abs(x - lastX) > 1.0)
             {
                 if (mOnOrientationListener != null)
