@@ -1,7 +1,12 @@
 package com.example.administrator.protage;
 
-import com.example.administrator.protage.baidumap.BaiduMapFragment;
-import com.example.fox_core.BaseActivity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.ContentFrameLayout;
+
+import com.example.fox_core.LatteDelegate;
+
+import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * @Author Alan
@@ -10,15 +15,29 @@ import com.example.fox_core.BaseActivity;
  * Issue
  */
 
-public class ProxyActivity extends BaseActivity {
+public abstract class ProxyActivity extends SupportActivity {
+
+    public  abstract LatteDelegate setRootDelegate();
 
     @Override
-    public Object getActivityLayout() {
-        return R.layout.activity_proxy;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initContainer(savedInstanceState);
+    }
+
+    private void initContainer(@Nullable Bundle savedInstanceState) {
+        final ContentFrameLayout contentFrameLayout = new ContentFrameLayout(this);
+        contentFrameLayout.setId(R.id.delegate_container);
+        setContentView(contentFrameLayout);
+        if (savedInstanceState == null) {
+            loadRootFragment(R.id.delegate_container,setRootDelegate());
+        }
     }
 
     @Override
-    public void onBindView() {
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_container,new BaiduMapFragment()).commit();
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        System.runFinalization();
     }
 }

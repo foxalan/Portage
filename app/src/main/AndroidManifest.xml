@@ -51,7 +51,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="amqSt3QpwdXXIgCYVgsyovAGr8ALX9uu" />
 
-        <activity android:name=".ProxyActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

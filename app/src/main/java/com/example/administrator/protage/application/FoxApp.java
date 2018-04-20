@@ -16,6 +16,7 @@ public class FoxApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SDKInitializer.initialize(getApplicationContext());
+        //百度地图
+//        SDKInitializer.initialize(getApplicationContext());
     }
 }
