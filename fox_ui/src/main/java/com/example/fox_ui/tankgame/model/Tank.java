@@ -35,35 +35,35 @@ public abstract class Tank  implements ITankListener{
         this.mType = mType;
     }
 
-    public Bitmap[] getmBitmap() {
+    public Bitmap[] getBitmap() {
         return mBitmap;
     }
 
-    public void setmBitmap(Bitmap[] mBitmap) {
+    public void setBitmap(Bitmap[] mBitmap) {
         this.mBitmap = mBitmap;
     }
 
-    public int getmPositionX() {
+    public int getPositionX() {
         return mPositionX;
     }
 
-    public void setmPositionX(int mPositionX) {
+    public void setPositionX(int mPositionX) {
         this.mPositionX = mPositionX;
     }
 
-    public int getmPositionY() {
+    public int getPositionY() {
         return mPositionY;
     }
 
-    public void setmPositionY(int mPositionY) {
+    public void setPositionY(int mPositionY) {
         this.mPositionY = mPositionY;
     }
 
-    public int getmSpeed() {
+    public int getSpeed() {
         return mSpeed;
     }
 
-    public void setmSpeed(int mSpeed) {
+    public void setSpeed(int mSpeed) {
         this.mSpeed = mSpeed;
     }
 
@@ -75,11 +75,11 @@ public abstract class Tank  implements ITankListener{
         isAlive = alive;
     }
 
-    public int getmCount() {
+    public int getCount() {
         return mCount;
     }
 
-    public void setmCount(int mCount) {
+    public void setCount(int mCount) {
         this.mCount = mCount;
     }
 }

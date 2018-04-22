@@ -1,5 +1,6 @@
 package com.example.fox_ui.tankgame.presenter;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.fox_ui.tankgame.model.HeroTank;
@@ -20,6 +21,7 @@ public class PresenterGameViewImpl implements IPresenterGameView{
     @Override
     public void initPaints(Paint paint) {
 
+        paint.setColor(Color.WHITE);
     }
 
     @Override

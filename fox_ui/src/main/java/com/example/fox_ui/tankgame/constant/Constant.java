@@ -13,5 +13,5 @@ public class Constant {
     public static final int TANK_DIRCTION_LEFT = 1;
     public static final int TANK_DIRCTION_RIGHT = 2;
     public static final int TANK_DIRCTION_DOWN = 3;
-    
+
 }
