@@ -39,7 +39,6 @@ public class WebViewFragment extends LatteDelegate {
         mWebView.setWebChromeClient(new WebChromeClient());
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.loadUrl(url);
-
         mLinerContainer.addView(mWebView);
     }
 

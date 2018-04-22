@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.example.fox_core.LatteDelegate;
 import com.example.fox_ui.fragment.WebViewFragment;
+import com.example.fox_ui.tankgame.TankFragment;
 
 /**
  * @Author Alan
@@ -22,7 +23,7 @@ public class HomeActivity extends ProxyActivity {
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new WebViewFragment();
+        return new TankFragment();
     }
 
 }
