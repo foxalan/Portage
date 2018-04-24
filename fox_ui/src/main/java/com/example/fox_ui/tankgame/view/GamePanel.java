@@ -27,7 +27,7 @@ public class GamePanel extends View {
     private int mRectLength = 20;
 
     private PresenterGameViewImpl mInitImpl;
-    private Paint mPaint;
+    private Paint  mPaint;
     private HeroTank mTank;
 
     public GamePanel(Context context) {

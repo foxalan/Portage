@@ -34,4 +34,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':fox_ui')
     implementation project(':fox_core')
+
+    compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
 }
