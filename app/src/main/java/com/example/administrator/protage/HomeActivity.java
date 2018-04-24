@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.example.fox_core.LatteDelegate;
-import com.example.fox_ui.fragment.WebViewFragment;
 import com.example.fox_ui.tankgame.TankFragment;
 
 import permissions.dispatcher.RuntimePermissions;
@@ -28,15 +27,13 @@ public class HomeActivity extends PermissionsActivity {
     @Override
     public LatteDelegate setRootDelegate() {
         //请求读写权限
-        requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0x0002);
-        requestPermission(new String[]{Manifest.permission.CALL_PHONE}, 0x0001);
-        requestPermission(new String[]{Manifest.permission.CAMERA}, 0x0003);
-
+        requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 0x0002);
         return new TankFragment();
     }
 
     @Override
     public void permissionSuccess(int requestCode) {
         super.permissionSuccess(requestCode);
+
     }
 }
