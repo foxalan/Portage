@@ -2,6 +2,7 @@ package com.example.fox_ui.tankgame.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ public class GamePanel extends View implements ITankControlListener{
 
     private PresenterGameViewImpl mInitImpl;
     private Paint mPaint;
+    private Paint mHeroPaint;
     private HeroTank mHeroTank;
 
     public GamePanel(Context context) {
@@ -57,12 +59,23 @@ public class GamePanel extends View implements ITankControlListener{
      * 数据初始化
      */
     private void init() {
+        initPaints();
         mInitImpl = new PresenterGameViewImpl();
         mPaint = new Paint();
         mHeroTank = new HeroTank();
 
         mInitImpl.initPaints(mPaint);
         mInitImpl.initHeroTank(mHeroTank);
+    }
+
+    /**
+     * 初始化画笔
+     */
+    private void initPaints() {
+        mHeroPaint = new Paint();
+        mHeroPaint.setColor(Color.RED);
+        mHeroPaint.setStyle(Paint.Style.STROKE);
+        mHeroPaint.setStrokeWidth(2);
     }
 
 
@@ -76,8 +89,7 @@ public class GamePanel extends View implements ITankControlListener{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawRect(canvas);
-        mHeroTank.drawTank(canvas);
-
+        mHeroTank.drawTank(canvas,mHeroPaint);
     }
 
     /**
@@ -100,28 +112,24 @@ public class GamePanel extends View implements ITankControlListener{
     public void moveUp() {
         mHeroTank.move(TANK_DIRECTION_UP);
         invalidate();
-        L.e("tank move up");
     }
 
     @Override
     public void moveDown() {
         mHeroTank.move(TANK_DIRECTION_DOWN);
         invalidate();
-        L.e("tank move down");
     }
 
     @Override
     public void moveLeft() {
         mHeroTank.move(TANK_DIRECTION_LEFT);
         invalidate();
-        L.e("tank move left");
     }
 
     @Override
     public void moveRight() {
         mHeroTank.move(TANK_DIRECTION_RIGHT);
         invalidate();
-        L.e("tank move right");
     }
 
     @Override

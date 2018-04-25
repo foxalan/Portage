@@ -43,19 +43,19 @@ public class HeroTank extends Tank {
      * @param canvas
      */
     @Override
-    public void drawTank(Canvas canvas) {
+    public void drawTank(Canvas canvas,Paint paint) {
         switch (getDirection()) {
             case 0:
-                drawTankUp(canvas);
+                drawTankUp(canvas,paint);
                 break;
             case 1:
-                drawTankLeft(canvas);
+                drawTankLeft(canvas,paint);
                 break;
             case 2:
-                drawTankRight(canvas);
+                drawTankRight(canvas,paint);
                 break;
             case 3:
-                drawTankDown(canvas);
+                drawTankDown(canvas,paint);
                 break;
             default:
                 break;
@@ -92,19 +92,17 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankUp(Canvas canvas) {
-
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2);
+    private void drawTankUp(Canvas canvas,Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
                 int x = (getPositionX() - 1) + j;
                 int y = (getPositionY() - 1) + i;
 
-                if ((i == 0 && j == 0) || (i == 0 && j == 2)) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                if (i == 0 && j == 2) {
                     continue;
                 }
                 Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
@@ -113,12 +111,7 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankDown(Canvas canvas) {
-
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2);
+    private void drawTankDown(Canvas canvas ,Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
@@ -137,12 +130,7 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankLeft(Canvas canvas) {
-
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2);
+    private void drawTankLeft(Canvas canvas,Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
@@ -161,12 +149,7 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankRight(Canvas canvas) {
-
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2);
+    private void drawTankRight(Canvas canvas,Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
