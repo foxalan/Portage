@@ -25,7 +25,7 @@ public class HeroTank extends Tank {
 
     private int mTanklength = 3;
 
-    public HeroTank(){
+    public HeroTank() {
 
     }
 
@@ -38,43 +38,52 @@ public class HeroTank extends Tank {
 
 
     /**
-     * 0 up 1 down 2 right 3 left
+     * 0 up 4 down 3 right 2left
+     *
      * @param canvas
      */
     @Override
     public void drawTank(Canvas canvas) {
-        switch (getDirection()){
+        switch (getDirection()) {
             case 0:
                 drawTankUp(canvas);
                 break;
             case 1:
+                drawTankLeft(canvas);
                 break;
             case 2:
+                drawTankRight(canvas);
                 break;
             case 3:
+                drawTankDown(canvas);
                 break;
             default:
-                    break;
+                break;
         }
     }
 
     @Override
     public void move(int direction) {
         //1.设置方向 2.改变坐标
-        switch (direction){
+        switch (direction) {
             case TANK_DIRECTION_UP:
                 setDirection(TANK_DIRECTION_UP);
-                setPositionY(getPositionY()-1);
+                setPositionY(getPositionY() - 1);
                 L.e("move up");
                 break;
             case TANK_DIRECTION_DOWN:
-
+                setDirection(TANK_DIRECTION_DOWN);
+                setPositionY(getPositionY() + 1);
                 L.e("move down");
                 break;
             case TANK_DIRECTION_LEFT:
+                setDirection(TANK_DIRECTION_LEFT);
+                setPositionX(getPositionX() - 1);
                 L.e("move left");
                 break;
             case TANK_DIRECTION_RIGHT:
+                setDirection(TANK_DIRECTION_RIGHT);
+                setPositionX(getPositionX() + 1);
                 L.e("move right");
                 break;
             default:
@@ -90,15 +99,88 @@ public class HeroTank extends Tank {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2);
 
-        for(int i = 0;i<mTanklength;i++){
-            for(int j = 0;j < mTanklength;j++){
-                int x = (getPositionX()-1)+j;
-                int y = (getPositionY()-1)+i;
-                if ((i==0&&j==0)||(i==0&&j==2)){
+        for (int i = 0; i < mTanklength; i++) {
+            for (int j = 0; j < mTanklength; j++) {
+                int x = (getPositionX() - 1) + j;
+                int y = (getPositionY() - 1) + i;
+
+                if ((i == 0 && j == 0) || (i == 0 && j == 2)) {
                     continue;
                 }
-                Rect rect = new Rect(x* RECT_LENGTH,y*RECT_LENGTH,(x+1)*RECT_LENGTH,(y+1)*RECT_LENGTH);
-                canvas.drawRect(rect,paint);
+                Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
+                canvas.drawRect(rect, paint);
+            }
+        }
+    }
+
+    private void drawTankDown(Canvas canvas) {
+
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+
+        for (int i = 0; i < mTanklength; i++) {
+            for (int j = 0; j < mTanklength; j++) {
+                int x = (getPositionX() - 1) + j;
+                int y = (getPositionY() - 1) + i;
+
+                if (i == 2 && j == 0) {
+                    continue;
+                }
+                if (i == 2 && j == 2) {
+                    continue;
+                }
+                Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
+                canvas.drawRect(rect, paint);
+            }
+        }
+    }
+
+    private void drawTankLeft(Canvas canvas) {
+
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+
+        for (int i = 0; i < mTanklength; i++) {
+            for (int j = 0; j < mTanklength; j++) {
+                int x = (getPositionX() - 1) + j;
+                int y = (getPositionY() - 1) + i;
+
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                if (i == 2 && j == 0) {
+                    continue;
+                }
+                Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
+                canvas.drawRect(rect, paint);
+            }
+        }
+    }
+
+    private void drawTankRight(Canvas canvas) {
+
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+
+        for (int i = 0; i < mTanklength; i++) {
+            for (int j = 0; j < mTanklength; j++) {
+                int x = (getPositionX() - 1) + j;
+                int y = (getPositionY() - 1) + i;
+
+                if (i == 2 && j == 2) {
+                    continue;
+                }
+                if (i == 0 && j == 2) {
+                    continue;
+                }
+                Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
+                canvas.drawRect(rect, paint);
             }
         }
     }

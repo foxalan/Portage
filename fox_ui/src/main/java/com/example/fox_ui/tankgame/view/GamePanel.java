@@ -106,18 +106,21 @@ public class GamePanel extends View implements ITankControlListener{
     @Override
     public void moveDown() {
         mHeroTank.move(TANK_DIRECTION_DOWN);
+        invalidate();
         L.e("tank move down");
     }
 
     @Override
     public void moveLeft() {
         mHeroTank.move(TANK_DIRECTION_LEFT);
+        invalidate();
         L.e("tank move left");
     }
 
     @Override
     public void moveRight() {
         mHeroTank.move(TANK_DIRECTION_RIGHT);
+        invalidate();
         L.e("tank move right");
     }
 
