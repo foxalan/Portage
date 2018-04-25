@@ -27,7 +27,7 @@ public class HomeActivity extends PermissionsActivity {
     @Override
     public LatteDelegate setRootDelegate() {
         //请求读写权限
-        requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 0x0002);
+     //   requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 0x0002);
         return new TankFragment();
     }
 

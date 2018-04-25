@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.example.fox_core.util.L;
 import com.example.fox_ui.tankgame.model.HeroTank;
 import com.example.fox_ui.tankgame.presenter.PresenterGameViewImpl;
 
@@ -21,14 +22,14 @@ import com.example.fox_ui.tankgame.presenter.PresenterGameViewImpl;
 
 public class GamePanel extends View {
 
-    private int mPanelWidth = 600;
-    private int mPanelHeight = 600;
-    private int mCount = 30;
-    private int mRectLength = 20;
+    private int mPanelWidth = 800;
+    private int mPanelHeight = 800;
+    private int mCount = 20;
+    private int mRectLength = 40;
 
     private PresenterGameViewImpl mInitImpl;
-    private Paint  mPaint;
-    private HeroTank mTank;
+    private Paint mPaint;
+    private HeroTank mHeroTank;
 
     public GamePanel(Context context) {
         this(context,null);
@@ -51,9 +52,10 @@ public class GamePanel extends View {
     private void init() {
         mInitImpl = new PresenterGameViewImpl();
         mPaint = new Paint();
+        mHeroTank = new HeroTank();
 
         mInitImpl.initPaints(mPaint);
-        mInitImpl.initHeroTank(mTank);
+        mInitImpl.initHeroTank(mHeroTank);
     }
 
 
@@ -67,6 +69,8 @@ public class GamePanel extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawRect(canvas);
+        mHeroTank.drawTank(canvas);
+
     }
 
     /**
@@ -76,8 +80,8 @@ public class GamePanel extends View {
     private void drawRect(Canvas canvas) {
         for(int i =0;i<mCount;i++){
             for(int j =0;j<mCount;j++){
-                Rect rect = new Rect();
-                rect.contains(i*mRectLength,j*mRectLength,(i+1)*mRectLength,(j+1)*mRectLength);
+               Rect rect = new Rect(j*mRectLength,i*mRectLength,(j+1)*mRectLength,(i+1)*mRectLength);
+                L.e("draw line"+i+"==="+j);
                 canvas.drawRect(rect,mPaint);
             }
         }

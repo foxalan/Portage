@@ -21,11 +21,7 @@ public abstract class Tank  implements ITankListener{
     private int mType;
     private int mDirection;
 
-    public Tank(){
-
-    }
-
-    public Tank(Bitmap[] mBitmap, int mPositionX, int mPositionY, int mSpeed, boolean isAlive, int mCount, int mType) {
+    public Tank(Bitmap[] mBitmap, int mPositionX, int mPositionY, int mSpeed, boolean isAlive, int mCount, int mType, int mDirection) {
         this.mBitmap = mBitmap;
         this.mPositionX = mPositionX;
         this.mPositionY = mPositionY;
@@ -33,37 +29,44 @@ public abstract class Tank  implements ITankListener{
         this.isAlive = isAlive;
         this.mCount = mCount;
         this.mType = mType;
+        this.mDirection = mDirection;
     }
 
-    public Bitmap[] getBitmap() {
+    public Tank(){
+
+    }
+
+
+
+    public Bitmap[] getmBitmap() {
         return mBitmap;
     }
 
-    public void setBitmap(Bitmap[] mBitmap) {
+    public void setmBitmap(Bitmap[] mBitmap) {
         this.mBitmap = mBitmap;
     }
 
-    public int getPositionX() {
+    public int getmPositionX() {
         return mPositionX;
     }
 
-    public void setPositionX(int mPositionX) {
+    public void setmPositionX(int mPositionX) {
         this.mPositionX = mPositionX;
     }
 
-    public int getPositionY() {
+    public int getmPositionY() {
         return mPositionY;
     }
 
-    public void setPositionY(int mPositionY) {
+    public void setmPositionY(int mPositionY) {
         this.mPositionY = mPositionY;
     }
 
-    public int getSpeed() {
+    public int getmSpeed() {
         return mSpeed;
     }
 
-    public void setSpeed(int mSpeed) {
+    public void setmSpeed(int mSpeed) {
         this.mSpeed = mSpeed;
     }
 
@@ -75,11 +78,27 @@ public abstract class Tank  implements ITankListener{
         isAlive = alive;
     }
 
-    public int getCount() {
+    public int getmCount() {
         return mCount;
     }
 
-    public void setCount(int mCount) {
+    public void setmCount(int mCount) {
         this.mCount = mCount;
+    }
+
+    public int getmType() {
+        return mType;
+    }
+
+    public void setmType(int mType) {
+        this.mType = mType;
+    }
+
+    public int getmDirection() {
+        return mDirection;
+    }
+
+    public void setmDirection(int mDirection) {
+        this.mDirection = mDirection;
     }
 }

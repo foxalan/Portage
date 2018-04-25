@@ -3,6 +3,7 @@ package com.example.fox_ui.tankgame.presenter;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.fox_ui.tankgame.constant.Constant;
 import com.example.fox_ui.tankgame.model.HeroTank;
 
 /**
@@ -22,10 +23,19 @@ public class PresenterGameViewImpl implements IPresenterGameView{
     public void initPaints(Paint paint) {
 
         paint.setColor(Color.WHITE);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
     }
 
     @Override
     public void initHeroTank(HeroTank heroTank) {
+        heroTank.setmCount(3);
+        heroTank.setAlive(true);
+        heroTank.setmSpeed(10);
+        heroTank.setmPositionX(10);
+        heroTank.setmPositionY(10);
+        heroTank.setmDirection(Constant.TANK_DIRECTION_UP);
+
 
     }
 }

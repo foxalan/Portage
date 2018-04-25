@@ -9,9 +9,18 @@ package com.example.fox_ui.tankgame.constant;
 
 public class Constant {
 
-    public static final int TANK_DIRCTION_UP = 0;
-    public static final int TANK_DIRCTION_LEFT = 1;
-    public static final int TANK_DIRCTION_RIGHT = 2;
-    public static final int TANK_DIRCTION_DOWN = 3;
+    public static final int TANK_DIRECTION_UP = 0;
+    public static final int TANK_DIRECTION_LEFT = 1;
+    public static final int TANK_DIRECTION_RIGHT = 2;
+    public static final int TANK_DIRECTION_DOWN = 3;
+
+    /**
+     * 每一格的距离
+     * 格子的个数
+     */
+    public static final int RECT_LENGTH = 40;
+    public static final int RECT_COUNT = 20;
+
+
 
 }

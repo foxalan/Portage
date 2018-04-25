@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <com.example.fox_ui.tankgame.view.GamePanel
+
         android:layout_gravity="center"
         android:background="@android:color/holo_blue_bright"
         android:layout_width="wrap_content"
