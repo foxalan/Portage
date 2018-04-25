@@ -6,9 +6,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.example.fox_core.util.L;
 import com.example.fox_ui.tankgame.constant.Constant;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_RIGHT;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 
 /**
  * @Author Alan
@@ -54,6 +59,27 @@ public class HeroTank extends Tank {
         }
     }
 
+    @Override
+    public void move(int direction) {
+        switch (direction){
+            case TANK_DIRECTION_UP:
+                L.e("move up");
+                break;
+            case TANK_DIRECTION_DOWN:
+                L.e("move down");
+                break;
+            case TANK_DIRECTION_LEFT:
+                L.e("move left");
+                break;
+            case TANK_DIRECTION_RIGHT:
+                L.e("move right");
+                break;
+            default:
+                break;
+
+        }
+    }
+
     private void drawTankUp(Canvas canvas) {
 
         Paint paint = new Paint();
@@ -74,8 +100,5 @@ public class HeroTank extends Tank {
         }
     }
 
-    @Override
-    public void move() {
 
-    }
 }

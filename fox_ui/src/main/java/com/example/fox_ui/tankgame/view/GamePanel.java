@@ -20,7 +20,7 @@ import com.example.fox_ui.tankgame.presenter.PresenterGameViewImpl;
  * Issue
  */
 
-public class GamePanel extends View {
+public class GamePanel extends View implements ITankControlListener{
 
     private int mPanelWidth = 800;
     private int mPanelHeight = 800;
@@ -88,14 +88,30 @@ public class GamePanel extends View {
     }
 
     /**
-     * 设置键盘监听事件
-     * @param keyCode
-     * @param event
-     * @return
+     * 设置坦克的移动
      */
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public void moveUp() {
 
-        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void moveDown() {
+
+    }
+
+    @Override
+    public void moveLeft() {
+
+    }
+
+    @Override
+    public void moveRight() {
+
+    }
+
+    @Override
+    public void shutBullet() {
+
     }
 }

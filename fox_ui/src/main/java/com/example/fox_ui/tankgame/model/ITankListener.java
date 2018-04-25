@@ -11,7 +11,15 @@ import android.graphics.Canvas;
 
 public interface ITankListener {
 
+
+    /**
+     * 在画布上画出坦克
+     * @param canvas
+     */
     void drawTank(Canvas canvas);
 
-    void move();
+    /**
+     * 坦克的移动
+     */
+    void move(int direction);
 }
