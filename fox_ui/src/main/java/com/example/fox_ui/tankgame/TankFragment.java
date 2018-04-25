@@ -1,9 +1,12 @@
 package com.example.fox_ui.tankgame;
 
+import android.support.v7.widget.AppCompatButton;
+import android.view.CollapsibleActionView;
 import android.view.View;
 
 import com.example.fox_core.LatteDelegate;
 import com.example.fox_ui.R;
+import com.example.fox_ui.tankgame.view.GamePanel;
 
 /**
  * @Author Alan
@@ -12,7 +15,10 @@ import com.example.fox_ui.R;
  * Issue
  */
 
-public class TankFragment extends LatteDelegate{
+public class TankFragment extends LatteDelegate implements View.OnClickListener{
+
+    private GamePanel gamePanel;
+
     @Override
     public Object getLayout() {
         return R.layout.fragment_tankgame;
@@ -21,5 +27,26 @@ public class TankFragment extends LatteDelegate{
     @Override
     public void onBindView(View rootView) {
 
+        gamePanel = rootView.findViewById(R.id.gamePanel);
+        rootView.findViewById(R.id.btn_move_up).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_move_down).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_move_left).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_move_right).setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        int i = view.getId();
+        if (i == R.id.btn_move_up) {
+            gamePanel.moveUp();
+        } else if (i == R.id.btn_move_down) {
+            gamePanel.moveDown();
+        } else if (i == R.id.btn_move_left) {
+            gamePanel.moveLeft();
+        } else if (i == R.id.btn_move_right) {
+            gamePanel.moveRight();
+        } else {
+        }
     }
 }

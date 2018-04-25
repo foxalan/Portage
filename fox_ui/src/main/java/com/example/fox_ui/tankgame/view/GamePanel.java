@@ -6,12 +6,19 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.fox_core.util.L;
+import com.example.fox_ui.tankgame.constant.Constant;
 import com.example.fox_ui.tankgame.model.HeroTank;
 import com.example.fox_ui.tankgame.presenter.PresenterGameViewImpl;
+
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_RIGHT;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 
 /**
  * @Author Alan
@@ -81,8 +88,7 @@ public class GamePanel extends View implements ITankControlListener{
         for(int i =0;i<mCount;i++){
             for(int j =0;j<mCount;j++){
                Rect rect = new Rect(j*mRectLength,i*mRectLength,(j+1)*mRectLength,(i+1)*mRectLength);
-                L.e("draw line"+i+"==="+j);
-                canvas.drawRect(rect,mPaint);
+               canvas.drawRect(rect,mPaint);
             }
         }
     }
@@ -92,22 +98,27 @@ public class GamePanel extends View implements ITankControlListener{
      */
     @Override
     public void moveUp() {
-
+        mHeroTank.move(TANK_DIRECTION_UP);
+        invalidate();
+        L.e("tank move up");
     }
 
     @Override
     public void moveDown() {
-
+        mHeroTank.move(TANK_DIRECTION_DOWN);
+        L.e("tank move down");
     }
 
     @Override
     public void moveLeft() {
-
+        mHeroTank.move(TANK_DIRECTION_LEFT);
+        L.e("tank move left");
     }
 
     @Override
     public void moveRight() {
-
+        mHeroTank.move(TANK_DIRECTION_RIGHT);
+        L.e("tank move right");
     }
 
     @Override

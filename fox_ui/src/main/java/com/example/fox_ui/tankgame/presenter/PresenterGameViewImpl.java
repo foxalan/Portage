@@ -32,9 +32,9 @@ public class PresenterGameViewImpl implements IPresenterGameView{
         heroTank.setmCount(3);
         heroTank.setAlive(true);
         heroTank.setmSpeed(10);
-        heroTank.setmPositionX(10);
-        heroTank.setmPositionY(10);
-        heroTank.setmDirection(Constant.TANK_DIRECTION_UP);
+        heroTank.setPositionX(10);
+        heroTank.setPositionY(10);
+        heroTank.setDirection(Constant.TANK_DIRECTION_UP);
 
 
     }

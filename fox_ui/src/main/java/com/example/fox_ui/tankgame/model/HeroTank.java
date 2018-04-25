@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
-import com.example.fox_ui.tankgame.constant.Constant;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
@@ -44,7 +43,7 @@ public class HeroTank extends Tank {
      */
     @Override
     public void drawTank(Canvas canvas) {
-        switch (getmDirection()){
+        switch (getDirection()){
             case 0:
                 drawTankUp(canvas);
                 break;
@@ -61,11 +60,15 @@ public class HeroTank extends Tank {
 
     @Override
     public void move(int direction) {
+        //1.设置方向 2.改变坐标
         switch (direction){
             case TANK_DIRECTION_UP:
+                setDirection(TANK_DIRECTION_UP);
+                setPositionY(getPositionY()-1);
                 L.e("move up");
                 break;
             case TANK_DIRECTION_DOWN:
+
                 L.e("move down");
                 break;
             case TANK_DIRECTION_LEFT:
@@ -89,8 +92,8 @@ public class HeroTank extends Tank {
 
         for(int i = 0;i<mTanklength;i++){
             for(int j = 0;j < mTanklength;j++){
-                int x = (getmPositionX()-1)+j;
-                int y = (getmPositionY()-1)+i;
+                int x = (getPositionX()-1)+j;
+                int y = (getPositionY()-1)+i;
                 if ((i==0&&j==0)||(i==0&&j==2)){
                     continue;
                 }

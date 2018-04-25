@@ -46,19 +46,19 @@ public abstract class Tank  implements ITankListener{
         this.mBitmap = mBitmap;
     }
 
-    public int getmPositionX() {
+    public int getPositionX() {
         return mPositionX;
     }
 
-    public void setmPositionX(int mPositionX) {
+    public void setPositionX(int mPositionX) {
         this.mPositionX = mPositionX;
     }
 
-    public int getmPositionY() {
+    public int getPositionY() {
         return mPositionY;
     }
 
-    public void setmPositionY(int mPositionY) {
+    public void setPositionY(int mPositionY) {
         this.mPositionY = mPositionY;
     }
 
@@ -94,11 +94,11 @@ public abstract class Tank  implements ITankListener{
         this.mType = mType;
     }
 
-    public int getmDirection() {
+    public int getDirection() {
         return mDirection;
     }
 
-    public void setmDirection(int mDirection) {
+    public void setDirection(int mDirection) {
         this.mDirection = mDirection;
     }
 }
