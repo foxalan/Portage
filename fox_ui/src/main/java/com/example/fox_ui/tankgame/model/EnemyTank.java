@@ -86,22 +86,22 @@ public class EnemyTank extends Tank {
 
         switch (dir){
             case TANK_DIRECTION_UP:
-                if (getPositionY()<1){
+                if (getPositionY()<2){
                     return false;
                 }
                 break;
             case TANK_DIRECTION_DOWN:
-                if (getPositionY()>RECT_COUNT){
+                if (getPositionY()>=(RECT_COUNT-2)){
                     return false;
                 }
                 break;
             case TANK_DIRECTION_LEFT:
-                if (getPositionX()<1){
+                if (getPositionX()<2){
                     return false;
                 }
                 break;
             case TANK_DIRECTION_RIGHT:
-                if (getPositionX()>RECT_COUNT){
+                if (getPositionX()>=(RECT_COUNT-2)){
                     return false;
                 }
                 break;
