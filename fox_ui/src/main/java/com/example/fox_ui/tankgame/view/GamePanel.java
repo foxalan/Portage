@@ -98,7 +98,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
      */
     private void initPaints() {
         mHeroPaint = new Paint();
-        mHeroPaint.setColor(Color.RED);
+        mHeroPaint.setColor(Color.BLACK);
         mHeroPaint.setStyle(Paint.Style.STROKE);
         mHeroPaint.setStrokeWidth(2);
 

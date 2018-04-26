@@ -24,9 +24,9 @@ import static com.example.fox_ui.tankgame.constant.Constant.MSG_INVALIDATE;
  * Issue
  */
 
-public class PresenterGameViewImpl implements IPresenterGameView{
+public class PresenterGameViewImpl implements IPresenterGameView {
 
-    public PresenterGameViewImpl(){
+    public PresenterGameViewImpl() {
 
     }
 
@@ -82,15 +82,25 @@ public class PresenterGameViewImpl implements IPresenterGameView{
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (EnemyTank enemyTank:enemyTankList){
+                for (EnemyTank enemyTank : enemyTankList) {
+
                     Random random = new Random();
-                    int r = random.nextInt(4);
-                    enemyTank.setDirection(r);
+                    int r = random.nextInt(100);
+                    if (r % 2 == 0) {
+                        enemyTank.setDirection(Constant.TANK_DIRECTION_UP);
+                    } else if (r % 3 == 0) {
+                        enemyTank.setDirection(Constant.TANK_DIRECTION_DOWN);
+                    } else if (r % 4 == 0) {
+                        enemyTank.setDirection(Constant.TANK_DIRECTION_LEFT);
+                    } else {
+                        enemyTank.setDirection(Constant.TANK_DIRECTION_RIGHT);
+                    }
+                    enemyTank.move(enemyTank.getDirection());
 
                 }
                 mHandler.sendEmptyMessage(MSG_INVALIDATE);
             }
-        },0,1000);
+        }, 0, 1000);
     }
 
 

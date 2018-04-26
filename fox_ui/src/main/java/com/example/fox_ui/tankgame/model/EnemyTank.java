@@ -53,6 +53,7 @@ public class EnemyTank extends Tank {
         if(!canMove(direction)){
             return;
         }
+        L.e(getPositionX()+"======================"+getPositionY());
         //1.设置方向 2.改变坐标
         switch (direction) {
             case TANK_DIRECTION_UP:
@@ -105,6 +106,7 @@ public class EnemyTank extends Tank {
                 }
                 break;
             default:
+
                 break;
         }
 
