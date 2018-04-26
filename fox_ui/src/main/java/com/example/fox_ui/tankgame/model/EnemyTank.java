@@ -6,6 +6,7 @@ import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
 
+import static com.example.fox_ui.tankgame.constant.Constant.RECT_COUNT;
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
@@ -49,6 +50,9 @@ public class EnemyTank extends Tank {
 
     @Override
     public void move(int direction) {
+        if(!canMove(direction)){
+            return;
+        }
         //1.设置方向 2.改变坐标
         switch (direction) {
             case TANK_DIRECTION_UP:
@@ -75,6 +79,36 @@ public class EnemyTank extends Tank {
                 break;
 
         }
+    }
+
+    private boolean canMove(int dir) {
+
+        switch (dir){
+            case TANK_DIRECTION_UP:
+                if (getPositionY()<1){
+                    return false;
+                }
+                break;
+            case TANK_DIRECTION_DOWN:
+                if (getPositionY()>RECT_COUNT){
+                    return false;
+                }
+                break;
+            case TANK_DIRECTION_LEFT:
+                if (getPositionX()<1){
+                    return false;
+                }
+                break;
+            case TANK_DIRECTION_RIGHT:
+                if (getPositionX()>RECT_COUNT){
+                    return false;
+                }
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 
     private void drawTankUp(Canvas canvas,Paint paint) {
@@ -138,6 +172,7 @@ public class EnemyTank extends Tank {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
+
                 int x = (getPositionX() - 1) + j;
                 int y = (getPositionY() - 1) + i;
 
