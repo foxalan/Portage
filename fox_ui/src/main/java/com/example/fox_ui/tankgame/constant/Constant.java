@@ -27,4 +27,9 @@ public class Constant {
      */
     public static final int MSG_INVALIDATE = 0x123;
 
+    /**
+     * ID
+     */
+
+
 }

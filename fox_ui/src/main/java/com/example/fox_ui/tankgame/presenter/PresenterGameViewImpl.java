@@ -51,6 +51,7 @@ public class PresenterGameViewImpl implements IPresenterGameView {
     @Override
     public void initEnemyTanks(List<EnemyTank> enemyTankList) {
         EnemyTank tank1 = new EnemyTank();
+        tank1.setId(0);
         tank1.setAlive(true);
         tank1.setmSpeed(10);
         tank1.setPositionX(5);
@@ -58,6 +59,7 @@ public class PresenterGameViewImpl implements IPresenterGameView {
         tank1.setDirection(Constant.TANK_DIRECTION_UP);
 
         EnemyTank tank2 = new EnemyTank();
+        tank2.setId(1);
         tank2.setAlive(true);
         tank2.setmSpeed(10);
         tank2.setPositionX(1);
@@ -65,6 +67,7 @@ public class PresenterGameViewImpl implements IPresenterGameView {
         tank2.setDirection(Constant.TANK_DIRECTION_UP);
 
         EnemyTank tank3 = new EnemyTank();
+        tank3.setId(2);
         tank3.setAlive(true);
         tank3.setmSpeed(10);
         tank3.setPositionX(15);

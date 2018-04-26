@@ -19,7 +19,19 @@ public abstract class Tank  implements ITankListener{
     private boolean isAlive;
     private int mCount;
     private int mType;
+
+
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int mId) {
+        this.mId = mId;
+    }
+
     private int mDirection;
+    private int mId;
 
     public Tank(Bitmap[] mBitmap, int mPositionX, int mPositionY, int mSpeed, boolean isAlive, int mCount, int mType, int mDirection) {
         this.mBitmap = mBitmap;
