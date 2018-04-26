@@ -13,8 +13,12 @@ import android.view.View;
 
 import com.example.fox_core.util.L;
 import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.EnemyTank;
 import com.example.fox_ui.tankgame.model.HeroTank;
 import com.example.fox_ui.tankgame.presenter.PresenterGameViewImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
@@ -38,7 +42,9 @@ public class GamePanel extends View implements ITankControlListener{
     private PresenterGameViewImpl mInitImpl;
     private Paint mPaint;
     private Paint mHeroPaint;
+    private Paint mEnemyPaint;
     private HeroTank mHeroTank;
+    private List<EnemyTank> mEnemyTankList;
 
     public GamePanel(Context context) {
         this(context,null);
@@ -63,9 +69,11 @@ public class GamePanel extends View implements ITankControlListener{
         mInitImpl = new PresenterGameViewImpl();
         mPaint = new Paint();
         mHeroTank = new HeroTank();
+        mEnemyTankList = new ArrayList<>();
 
         mInitImpl.initPaints(mPaint);
         mInitImpl.initHeroTank(mHeroTank);
+        mInitImpl.initEnemyTanks(mEnemyTankList);
     }
 
     /**
@@ -76,6 +84,11 @@ public class GamePanel extends View implements ITankControlListener{
         mHeroPaint.setColor(Color.RED);
         mHeroPaint.setStyle(Paint.Style.STROKE);
         mHeroPaint.setStrokeWidth(2);
+
+        mEnemyPaint = new Paint();
+        mEnemyPaint.setColor(Color.RED);
+        mEnemyPaint.setStyle(Paint.Style.STROKE);
+        mEnemyPaint.setStrokeWidth(2);
     }
 
 
@@ -90,6 +103,13 @@ public class GamePanel extends View implements ITankControlListener{
         super.onDraw(canvas);
         drawRect(canvas);
         mHeroTank.drawTank(canvas,mHeroPaint);
+        drawEnemyTanks(canvas);
+    }
+
+    private void drawEnemyTanks(Canvas canvas) {
+        for(EnemyTank enemyTank:mEnemyTankList){
+            enemyTank.drawTank(canvas,mEnemyPaint);
+        }
     }
 
     /**

@@ -36,8 +36,6 @@ public abstract class Tank  implements ITankListener{
 
     }
 
-
-
     public Bitmap[] getmBitmap() {
         return mBitmap;
     }

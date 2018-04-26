@@ -2,8 +2,11 @@ package com.example.fox_ui.tankgame.presenter;
 
 import android.graphics.Paint;
 
+import com.example.fox_ui.tankgame.model.EnemyTank;
 import com.example.fox_ui.tankgame.model.HeroTank;
 import com.example.fox_ui.tankgame.model.Tank;
+
+import java.util.List;
 
 /**
  * @Author Alan
@@ -25,6 +28,12 @@ public interface IPresenterGameView {
      * @param heroTank
      */
     void initHeroTank(HeroTank heroTank);
+
+    /**
+     * 初始化对面的坦克
+     * @param enemyTankList
+     */
+    void initEnemyTanks(List<EnemyTank> enemyTankList);
 
 
 }

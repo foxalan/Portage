@@ -1,6 +1,5 @@
 package com.example.fox_ui.tankgame.model;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -15,24 +14,18 @@ import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 
 /**
  * @Author Alan
- * Date 2018/4/22 0022
+ * Date 2018/4/26 0026
  * Function
  * Issue
  */
 
-public class HeroTank extends Tank {
+public class EnemyTank extends Tank {
+
+    public EnemyTank(){
+
+    }
 
     private int mTanklength = 3;
-
-    public HeroTank() {
-
-    }
-
-    @SuppressWarnings("unused")
-    public HeroTank(Bitmap[] mBitmap, int mPositionX, int mPositionY, int mSpeed, boolean isAlive, int mCount, int mType, int mDirection) {
-        super(mBitmap, mPositionX, mPositionY, mSpeed, isAlive, mCount, mType, mDirection);
-
-    }
 
     @Override
     public void drawTank(Canvas canvas,Paint paint) {
@@ -159,6 +152,4 @@ public class HeroTank extends Tank {
             }
         }
     }
-
-
 }
