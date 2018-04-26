@@ -1,6 +1,8 @@
 package com.example.fox_ui.tankgame.presenter;
 
 import android.graphics.Paint;
+import android.os.Handler;
+import android.view.View;
 
 import com.example.fox_ui.tankgame.model.EnemyTank;
 import com.example.fox_ui.tankgame.model.HeroTank;
@@ -35,5 +37,11 @@ public interface IPresenterGameView {
      */
     void initEnemyTanks(List<EnemyTank> enemyTankList);
 
-
+    /**
+     * 控制敌方坦克行走
+     * @param enemyTankList
+     * @param view
+     * @param mHandler
+     */
+    void initEnemyTanksMove(List<EnemyTank> enemyTankList, View view, Handler mHandler);
 }

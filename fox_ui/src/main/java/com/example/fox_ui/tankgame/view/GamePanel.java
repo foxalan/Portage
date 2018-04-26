@@ -5,21 +5,24 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 
-import com.example.fox_core.util.L;
-import com.example.fox_ui.tankgame.constant.Constant;
 import com.example.fox_ui.tankgame.model.EnemyTank;
 import com.example.fox_ui.tankgame.model.HeroTank;
 import com.example.fox_ui.tankgame.presenter.PresenterGameViewImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
+
+import static com.example.fox_ui.tankgame.constant.Constant.MSG_INVALIDATE;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_RIGHT;
@@ -32,7 +35,7 @@ import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
  * Issue
  */
 
-public class GamePanel extends View implements ITankControlListener{
+public class GamePanel extends View implements ITankControlListener, IGameControlListener {
 
     private int mPanelWidth = 800;
     private int mPanelHeight = 800;
@@ -46,12 +49,26 @@ public class GamePanel extends View implements ITankControlListener{
     private HeroTank mHeroTank;
     private List<EnemyTank> mEnemyTankList;
 
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case MSG_INVALIDATE:
+                    invalidate();
+                    break;
+                default:
+                        break;
+            }
+        }
+    };
+
     public GamePanel(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public GamePanel(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public GamePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -95,32 +112,33 @@ public class GamePanel extends View implements ITankControlListener{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(mPanelWidth,mPanelHeight);
+        setMeasuredDimension(mPanelWidth, mPanelHeight);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawRect(canvas);
-        mHeroTank.drawTank(canvas,mHeroPaint);
+        mHeroTank.drawTank(canvas, mHeroPaint);
         drawEnemyTanks(canvas);
     }
 
     private void drawEnemyTanks(Canvas canvas) {
-        for(EnemyTank enemyTank:mEnemyTankList){
-            enemyTank.drawTank(canvas,mEnemyPaint);
+        for (EnemyTank enemyTank : mEnemyTankList) {
+            enemyTank.drawTank(canvas, mEnemyPaint);
         }
     }
 
     /**
      * 画小块块
+     *
      * @param canvas
      */
     private void drawRect(Canvas canvas) {
-        for(int i =0;i<mCount;i++){
-            for(int j =0;j<mCount;j++){
-               Rect rect = new Rect(j*mRectLength,i*mRectLength,(j+1)*mRectLength,(i+1)*mRectLength);
-               canvas.drawRect(rect,mPaint);
+        for (int i = 0; i < mCount; i++) {
+            for (int j = 0; j < mCount; j++) {
+                Rect rect = new Rect(j * mRectLength, i * mRectLength, (j + 1) * mRectLength, (i + 1) * mRectLength);
+                canvas.drawRect(rect, mPaint);
             }
         }
     }
@@ -154,6 +172,31 @@ public class GamePanel extends View implements ITankControlListener{
 
     @Override
     public void shutBullet() {
+
+    }
+
+    /**
+     *待优化
+     * 不能在非UI线程中更新UI
+     */
+    @Override
+    public void startGame() {
+       mInitImpl.initEnemyTanksMove(mEnemyTankList,this,mHandler);
+
+    }
+
+    @Override
+    public void pauseGame() {
+
+    }
+
+    @Override
+    public void reStartGame() {
+
+    }
+
+    @Override
+    public void stopGame() {
 
     }
 }

@@ -2,12 +2,20 @@ package com.example.fox_ui.tankgame.presenter;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.View;
 
 import com.example.fox_ui.tankgame.constant.Constant;
 import com.example.fox_ui.tankgame.model.EnemyTank;
 import com.example.fox_ui.tankgame.model.HeroTank;
 
+import java.sql.Time;
 import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+
+import static com.example.fox_ui.tankgame.constant.Constant.MSG_INVALIDATE;
 
 /**
  * @Author Alan
@@ -67,4 +75,23 @@ public class PresenterGameViewImpl implements IPresenterGameView{
         enemyTankList.add(tank2);
         enemyTankList.add(tank3);
     }
+
+    @Override
+    public void initEnemyTanksMove(final List<EnemyTank> enemyTankList, View view, final android.os.Handler mHandler) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for (EnemyTank enemyTank:enemyTankList){
+                    Random random = new Random();
+                    int r = random.nextInt(4);
+                    enemyTank.setDirection(r);
+
+                }
+                mHandler.sendEmptyMessage(MSG_INVALIDATE);
+            }
+        },0,1000);
+    }
+
+
 }

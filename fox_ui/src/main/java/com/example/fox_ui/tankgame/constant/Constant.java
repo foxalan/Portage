@@ -22,5 +22,9 @@ public class Constant {
     public static final int RECT_COUNT = 20;
 
 
+    /**
+     * 消息
+     */
+    public static final int MSG_INVALIDATE = 0x123;
 
 }
