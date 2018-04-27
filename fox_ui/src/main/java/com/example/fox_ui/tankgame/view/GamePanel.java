@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
 import com.example.fox_ui.tankgame.model.tank.EnemyTank;
 import com.example.fox_ui.tankgame.model.tank.HeroTank;
@@ -49,6 +50,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     private HeroTank mHeroTank;
     private List<EnemyTank> mEnemyTankList;
     private List<Bullet> mBulletList;
+    private List<ObstacleWood> mObstacleWoodList;
 
     private Handler mHandler = new Handler(){
         @Override
@@ -90,6 +92,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
         mHeroTank = new HeroTank();
         mEnemyTankList = new ArrayList<>();
         mBulletList = new ArrayList<>();
+        mObstacleWoodList = new ArrayList<>();
 
         mInitImpl.initPaints(mPaint);
         mInitImpl.initHeroTank(mHeroTank);

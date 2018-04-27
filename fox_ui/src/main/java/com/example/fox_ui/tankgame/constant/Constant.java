@@ -42,6 +42,13 @@ public class Constant {
     public static final int BULLET_TYPE_Enemy = 1;
 
 
+    /**
+     * 障碍物类型
+     */
+
+    public static final int OBSTACLE_TYPE_EASY_DES = 0;
+    public static final int OBSTACLE_TYPE_HARD_DES = 1;
+    public static final int OBSTACLE_TYPE_NOT_DES = 2;
 
 
 }

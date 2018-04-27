@@ -20,8 +20,6 @@ public abstract class Tank  implements ITankListener{
     private int mCount;
     private int mType;
 
-
-
     public int getId() {
         return mId;
     }
