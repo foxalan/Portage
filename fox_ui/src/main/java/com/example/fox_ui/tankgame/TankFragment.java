@@ -1,10 +1,8 @@
 package com.example.fox_ui.tankgame;
 
-import android.support.v7.widget.AppCompatButton;
-import android.view.CollapsibleActionView;
 import android.view.View;
 
-import com.example.fox_core.LatteDelegate;
+import com.example.fox_core.fragment.LatteDelegate;
 import com.example.fox_ui.R;
 import com.example.fox_ui.tankgame.view.GamePanel;
 

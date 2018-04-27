@@ -2,7 +2,7 @@ package com.example.fox_ui;
 
 import android.view.View;
 
-import com.example.fox_core.BaseFragment;
+import com.example.fox_core.fragment.BaseFragment;
 
 /**
  * @Author Alan

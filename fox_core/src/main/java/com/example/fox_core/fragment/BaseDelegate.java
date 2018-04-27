@@ -1,4 +1,4 @@
-package com.example.fox_core;
+package com.example.fox_core.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

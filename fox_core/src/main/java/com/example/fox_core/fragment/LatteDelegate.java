@@ -1,4 +1,4 @@
-package com.example.fox_core;
+package com.example.fox_core.fragment;
 
 /**
  * @author Alan

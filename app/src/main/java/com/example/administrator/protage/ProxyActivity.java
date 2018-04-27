@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ContentFrameLayout;
 
-import com.example.fox_core.LatteDelegate;
+import com.example.fox_core.fragment.LatteDelegate;
 
 import me.yokeyword.fragmentation.SupportActivity;
 

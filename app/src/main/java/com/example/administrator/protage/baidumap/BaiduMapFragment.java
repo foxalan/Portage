@@ -10,7 +10,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.example.administrator.protage.R;
 import com.example.administrator.protage.baidumap.impl.MapInitializeImpl;
-import com.example.fox_core.BaseFragment;
+import com.example.fox_core.fragment.BaseFragment;
 
 /**
  * @Author Alan

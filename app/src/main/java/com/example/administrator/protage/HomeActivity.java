@@ -1,13 +1,10 @@
 package com.example.administrator.protage;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.fox_core.LatteDelegate;
+import com.example.fox_core.fragment.LatteDelegate;
 import com.example.fox_ui.tankgame.TankFragment;
-
-import permissions.dispatcher.RuntimePermissions;
 
 /**
  * @Author Alan

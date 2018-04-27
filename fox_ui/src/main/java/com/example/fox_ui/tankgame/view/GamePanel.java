@@ -10,7 +10,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.fox_ui.tankgame.constant.Constant;
 import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
