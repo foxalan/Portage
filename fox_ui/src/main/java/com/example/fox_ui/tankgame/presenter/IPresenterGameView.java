@@ -4,9 +4,9 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.view.View;
 
-import com.example.fox_ui.tankgame.model.EnemyTank;
-import com.example.fox_ui.tankgame.model.HeroTank;
-import com.example.fox_ui.tankgame.model.Tank;
+import com.example.fox_ui.tankgame.model.bullet.Bullet;
+import com.example.fox_ui.tankgame.model.tank.EnemyTank;
+import com.example.fox_ui.tankgame.model.tank.HeroTank;
 
 import java.util.List;
 
@@ -44,4 +44,11 @@ public interface IPresenterGameView {
      * @param mHandler
      */
     void initEnemyTanksMove(List<EnemyTank> enemyTankList, View view, Handler mHandler);
+
+    /**
+     * 控制子弹的移动
+     * @param bulletList
+     * @param handler
+     */
+    void initBulletMove(List<Bullet> bulletList,Handler handler);
 }

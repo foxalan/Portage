@@ -1,7 +1,9 @@
-package com.example.fox_ui.tankgame.model;
+package com.example.fox_ui.tankgame.model.tank;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
+import com.example.fox_ui.tankgame.model.bullet.Bullet;
 
 /**
  * @Author Alan
@@ -25,4 +27,10 @@ public interface ITankListener {
      * @param direction
      */
     void move(int direction);
+
+    /**
+     * 发射子弹
+     * @return
+     */
+    Bullet shoutBullet();
 }

@@ -48,7 +48,11 @@ public class TankFragment extends LatteDelegate implements View.OnClickListener{
             gamePanel.moveLeft();
         } else if (i == R.id.btn_move_right) {
             gamePanel.moveRight();
-        } else {
+        } else if(i == R.id.btn_bullet){
+            gamePanel.shutBullet();
+
+        } else{
+
         }
     }
 }

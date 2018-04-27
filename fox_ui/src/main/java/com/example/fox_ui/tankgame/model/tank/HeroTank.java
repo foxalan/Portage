@@ -1,12 +1,14 @@
-package com.example.fox_ui.tankgame.model;
+package com.example.fox_ui.tankgame.model.tank;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
+import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.bullet.Bullet;
 
-import static com.example.fox_ui.tankgame.constant.Constant.RECT_COUNT;
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
@@ -15,18 +17,24 @@ import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 
 /**
  * @Author Alan
- * Date 2018/4/26 0026
+ * Date 2018/4/22 0022
  * Function
  * Issue
  */
 
-public class EnemyTank extends Tank {
+public class HeroTank extends Tank {
 
-    public EnemyTank(){
+    private int mTanklength = 3;
+
+    public HeroTank() {
 
     }
 
-    private int mTanklength = 3;
+    @SuppressWarnings("unused")
+    public HeroTank(Bitmap[] mBitmap, int mPositionX, int mPositionY, int mSpeed, boolean isAlive, int mCount, int mType, int mDirection) {
+        super(mBitmap, mPositionX, mPositionY, mSpeed, isAlive, mCount, mType, mDirection);
+
+    }
 
     @Override
     public void drawTank(Canvas canvas,Paint paint) {
@@ -50,10 +58,6 @@ public class EnemyTank extends Tank {
 
     @Override
     public void move(int direction) {
-        if(!canMove(direction)){
-            return;
-        }
-        L.e(getPositionX()+"======================"+getPositionY());
         //1.设置方向 2.改变坐标
         switch (direction) {
             case TANK_DIRECTION_UP:
@@ -82,35 +86,16 @@ public class EnemyTank extends Tank {
         }
     }
 
-    private boolean canMove(int dir) {
-
-        switch (dir){
-            case TANK_DIRECTION_UP:
-                if (getPositionY()<2){
-                    return false;
-                }
-                break;
-            case TANK_DIRECTION_DOWN:
-                if (getPositionY()>=(RECT_COUNT-2)){
-                    return false;
-                }
-                break;
-            case TANK_DIRECTION_LEFT:
-                if (getPositionX()<2){
-                    return false;
-                }
-                break;
-            case TANK_DIRECTION_RIGHT:
-                if (getPositionX()>=(RECT_COUNT-2)){
-                    return false;
-                }
-                break;
-            default:
-
-                break;
-        }
-
-        return true;
+    @Override
+    public Bullet shoutBullet() {
+        L.e("hero tank set bullet");
+        Bullet bullet = new Bullet();
+        bullet.setDir(getDirection());
+        bullet.setExist(true);
+        bullet.setPositionY(getPositionY());
+        bullet.setPositionX(getPositionX());
+        bullet.setType(Constant.BULLET_TYPE_HERO);
+        return bullet;
     }
 
     private void drawTankUp(Canvas canvas,Paint paint) {
@@ -174,7 +159,6 @@ public class EnemyTank extends Tank {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
-
                 int x = (getPositionX() - 1) + j;
                 int y = (getPositionY() - 1) + i;
 
@@ -189,4 +173,6 @@ public class EnemyTank extends Tank {
             }
         }
     }
+
+
 }

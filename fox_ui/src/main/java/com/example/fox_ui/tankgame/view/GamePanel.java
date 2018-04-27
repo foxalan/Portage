@@ -10,19 +10,20 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 
-import com.example.fox_ui.tankgame.model.EnemyTank;
-import com.example.fox_ui.tankgame.model.HeroTank;
+import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.bullet.Bullet;
+import com.example.fox_ui.tankgame.model.tank.EnemyTank;
+import com.example.fox_ui.tankgame.model.tank.HeroTank;
 import com.example.fox_ui.tankgame.presenter.PresenterGameViewImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 
 import static com.example.fox_ui.tankgame.constant.Constant.MSG_INVALIDATE;
+import static com.example.fox_ui.tankgame.constant.Constant.RECT_COUNT_HEIGHT;
+import static com.example.fox_ui.tankgame.constant.Constant.RECT_COUNT_WIDTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_RIGHT;
@@ -37,17 +38,17 @@ import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 
 public class GamePanel extends View implements ITankControlListener, IGameControlListener {
 
-    private int mPanelWidth = 800;
-    private int mPanelHeight = 800;
-    private int mCount = 20;
-    private int mRectLength = 40;
+
+    private int mRectLength = Constant.RECT_LENGTH;
 
     private PresenterGameViewImpl mInitImpl;
     private Paint mPaint;
     private Paint mHeroPaint;
     private Paint mEnemyPaint;
+
     private HeroTank mHeroTank;
     private List<EnemyTank> mEnemyTankList;
+    private List<Bullet> mBulletList;
 
     private Handler mHandler = new Handler(){
         @Override
@@ -85,8 +86,10 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
         initPaints();
         mInitImpl = new PresenterGameViewImpl();
         mPaint = new Paint();
+
         mHeroTank = new HeroTank();
         mEnemyTankList = new ArrayList<>();
+        mBulletList = new ArrayList<>();
 
         mInitImpl.initPaints(mPaint);
         mInitImpl.initHeroTank(mHeroTank);
@@ -99,12 +102,12 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     private void initPaints() {
         mHeroPaint = new Paint();
         mHeroPaint.setColor(Color.BLACK);
-        mHeroPaint.setStyle(Paint.Style.STROKE);
+        mHeroPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mHeroPaint.setStrokeWidth(2);
 
         mEnemyPaint = new Paint();
         mEnemyPaint.setColor(Color.RED);
-        mEnemyPaint.setStyle(Paint.Style.STROKE);
+        mEnemyPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mEnemyPaint.setStrokeWidth(2);
     }
 
@@ -112,7 +115,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(mPanelWidth, mPanelHeight);
+        setMeasuredDimension(Constant.PANEL_WIDTH, Constant.PANEL_HEIGHT);
     }
 
     @Override
@@ -121,8 +124,20 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
         drawRect(canvas);
         mHeroTank.drawTank(canvas, mHeroPaint);
         drawEnemyTanks(canvas);
+        drawBullets(canvas);
     }
 
+    private void drawBullets(Canvas canvas) {
+        for(Bullet bullet:mBulletList){
+            bullet.drawBullet(canvas,mHeroPaint);
+        }
+    }
+
+
+    /**
+     * 画敌方
+     * @param canvas
+     */
     private void drawEnemyTanks(Canvas canvas) {
         for (EnemyTank enemyTank : mEnemyTankList) {
             enemyTank.drawTank(canvas, mEnemyPaint);
@@ -135,8 +150,8 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
      * @param canvas
      */
     private void drawRect(Canvas canvas) {
-        for (int i = 0; i < mCount; i++) {
-            for (int j = 0; j < mCount; j++) {
+        for (int i = 0; i < RECT_COUNT_HEIGHT; i++) {
+            for (int j = 0; j < RECT_COUNT_WIDTH; j++) {
                 Rect rect = new Rect(j * mRectLength, i * mRectLength, (j + 1) * mRectLength, (i + 1) * mRectLength);
                 canvas.drawRect(rect, mPaint);
             }
@@ -172,7 +187,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
 
     @Override
     public void shutBullet() {
-
+        mBulletList.add(mHeroTank.shoutBullet());
     }
 
     /**
@@ -182,7 +197,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     @Override
     public void startGame() {
        mInitImpl.initEnemyTanksMove(mEnemyTankList,this,mHandler);
-
+       mInitImpl.initBulletMove(mBulletList,mHandler);
     }
 
     @Override

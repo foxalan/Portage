@@ -55,6 +55,16 @@
             android:gravity="center"
             android:layout_width="40dp"
             android:layout_height="40dp" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_bullet"
+            android:background="@drawable/bg_btn"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:text="大"
+            android:gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
 
     </LinearLayout>
 </LinearLayout>

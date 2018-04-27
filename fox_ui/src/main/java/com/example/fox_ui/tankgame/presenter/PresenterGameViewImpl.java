@@ -5,15 +5,14 @@ import android.graphics.Paint;
 import android.view.View;
 
 import com.example.fox_ui.tankgame.constant.Constant;
-import com.example.fox_ui.tankgame.model.EnemyTank;
-import com.example.fox_ui.tankgame.model.HeroTank;
+import com.example.fox_ui.tankgame.model.bullet.Bullet;
+import com.example.fox_ui.tankgame.model.tank.EnemyTank;
+import com.example.fox_ui.tankgame.model.tank.HeroTank;
 
-import java.sql.Time;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
 
 import static com.example.fox_ui.tankgame.constant.Constant.MSG_INVALIDATE;
 
@@ -102,6 +101,21 @@ public class PresenterGameViewImpl implements IPresenterGameView {
 
                 }
                 mHandler.sendEmptyMessage(MSG_INVALIDATE);
+            }
+        }, 0, 1000);
+    }
+
+    @Override
+    public void initBulletMove(final List<Bullet> bulletList, final android.os.Handler handler) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for (Bullet bullet : bulletList) {
+
+                    bullet.move();
+                }
+                handler.sendEmptyMessage(MSG_INVALIDATE);
             }
         }, 0, 1000);
     }

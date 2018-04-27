@@ -1,11 +1,12 @@
-package com.example.fox_ui.tankgame.model;
+package com.example.fox_ui.tankgame.model.tank;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
+import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.bullet.Bullet;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
@@ -15,39 +16,34 @@ import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 
 /**
  * @Author Alan
- * Date 2018/4/22 0022
+ * Date 2018/4/26 0026
  * Function
  * Issue
  */
 
-public class HeroTank extends Tank {
+public class EnemyTank extends Tank {
 
-    private int mTanklength = 3;
-
-    public HeroTank() {
+    public EnemyTank() {
 
     }
 
-    @SuppressWarnings("unused")
-    public HeroTank(Bitmap[] mBitmap, int mPositionX, int mPositionY, int mSpeed, boolean isAlive, int mCount, int mType, int mDirection) {
-        super(mBitmap, mPositionX, mPositionY, mSpeed, isAlive, mCount, mType, mDirection);
-
-    }
+    private int mLength = 3;
+    private int deviation = 2;
 
     @Override
-    public void drawTank(Canvas canvas,Paint paint) {
+    public void drawTank(Canvas canvas, Paint paint) {
         switch (getDirection()) {
             case 0:
-                drawTankUp(canvas,paint);
+                drawTankUp(canvas, paint);
                 break;
             case 1:
-                drawTankLeft(canvas,paint);
+                drawTankLeft(canvas, paint);
                 break;
             case 2:
-                drawTankRight(canvas,paint);
+                drawTankRight(canvas, paint);
                 break;
             case 3:
-                drawTankDown(canvas,paint);
+                drawTankDown(canvas, paint);
                 break;
             default:
                 break;
@@ -56,6 +52,10 @@ public class HeroTank extends Tank {
 
     @Override
     public void move(int direction) {
+        if (!canMove(direction)) {
+            return;
+        }
+        L.e(getPositionX() + "======================" + getPositionY());
         //1.设置方向 2.改变坐标
         switch (direction) {
             case TANK_DIRECTION_UP:
@@ -84,10 +84,45 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankUp(Canvas canvas,Paint paint) {
+    @Override
+    public Bullet shoutBullet() {
+        return null;
+    }
 
-        for (int i = 0; i < mTanklength; i++) {
-            for (int j = 0; j < mTanklength; j++) {
+    private boolean canMove(int dir) {
+
+        switch (dir) {
+            case TANK_DIRECTION_UP:
+                if (getPositionY() < deviation) {
+                    return false;
+                }
+                break;
+            case TANK_DIRECTION_DOWN:
+                if (getPositionY() >= (Constant.RECT_COUNT_HEIGHT - deviation)) {
+                    return false;
+                }
+                break;
+            case TANK_DIRECTION_LEFT:
+                if (getPositionX() < deviation) {
+                    return false;
+                }
+                break;
+            case TANK_DIRECTION_RIGHT:
+                if (getPositionX() >= (Constant.RECT_COUNT_WIDTH - deviation)) {
+                    return false;
+                }
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    private void drawTankUp(Canvas canvas, Paint paint) {
+
+        for (int i = 0; i < mLength; i++) {
+            for (int j = 0; j < mLength; j++) {
                 int x = (getPositionX() - 1) + j;
                 int y = (getPositionY() - 1) + i;
 
@@ -103,10 +138,10 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankDown(Canvas canvas ,Paint paint) {
+    private void drawTankDown(Canvas canvas, Paint paint) {
 
-        for (int i = 0; i < mTanklength; i++) {
-            for (int j = 0; j < mTanklength; j++) {
+        for (int i = 0; i < mLength; i++) {
+            for (int j = 0; j < mLength; j++) {
                 int x = (getPositionX() - 1) + j;
                 int y = (getPositionY() - 1) + i;
 
@@ -122,10 +157,10 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankLeft(Canvas canvas,Paint paint) {
+    private void drawTankLeft(Canvas canvas, Paint paint) {
 
-        for (int i = 0; i < mTanklength; i++) {
-            for (int j = 0; j < mTanklength; j++) {
+        for (int i = 0; i < mLength; i++) {
+            for (int j = 0; j < mLength; j++) {
                 int x = (getPositionX() - 1) + j;
                 int y = (getPositionY() - 1) + i;
 
@@ -141,10 +176,11 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankRight(Canvas canvas,Paint paint) {
+    private void drawTankRight(Canvas canvas, Paint paint) {
 
-        for (int i = 0; i < mTanklength; i++) {
-            for (int j = 0; j < mTanklength; j++) {
+        for (int i = 0; i < mLength; i++) {
+            for (int j = 0; j < mLength; j++) {
+
                 int x = (getPositionX() - 1) + j;
                 int y = (getPositionY() - 1) + i;
 
@@ -159,6 +195,4 @@ public class HeroTank extends Tank {
             }
         }
     }
-
-
 }

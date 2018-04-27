@@ -1,4 +1,4 @@
-package com.example.fox_ui.tankgame.model;
+package com.example.fox_ui.tankgame.model.tank;
 
 import android.graphics.Bitmap;
 
