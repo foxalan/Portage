@@ -55,28 +55,28 @@ public class EnemyTank extends Tank {
         if (!canMove(direction)) {
             return;
         }
-        L.e(getPositionX() + "======================" + getPositionY());
+        //L.e(getPositionX() + "======================" + getPositionY());
         //1.设置方向 2.改变坐标
         switch (direction) {
             case TANK_DIRECTION_UP:
                 setDirection(TANK_DIRECTION_UP);
                 setPositionY(getPositionY() - 1);
-                L.e("move up");
+          //      L.e("move up");
                 break;
             case TANK_DIRECTION_DOWN:
                 setDirection(TANK_DIRECTION_DOWN);
                 setPositionY(getPositionY() + 1);
-                L.e("move down");
+          //      L.e("move down");
                 break;
             case TANK_DIRECTION_LEFT:
                 setDirection(TANK_DIRECTION_LEFT);
                 setPositionX(getPositionX() - 1);
-                L.e("move left");
+          //      L.e("move left");
                 break;
             case TANK_DIRECTION_RIGHT:
                 setDirection(TANK_DIRECTION_RIGHT);
                 setPositionX(getPositionX() + 1);
-                L.e("move right");
+          //      L.e("move right");
                 break;
             default:
                 break;

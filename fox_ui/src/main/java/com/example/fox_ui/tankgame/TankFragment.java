@@ -32,6 +32,7 @@ public class TankFragment extends LatteDelegate implements View.OnClickListener{
         rootView.findViewById(R.id.btn_move_down).setOnClickListener(this);
         rootView.findViewById(R.id.btn_move_left).setOnClickListener(this);
         rootView.findViewById(R.id.btn_move_right).setOnClickListener(this);
+        rootView.findViewById(R.id.btn_bullet).setOnClickListener(this);
 
         gamePanel.startGame();
 

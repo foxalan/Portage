@@ -7,6 +7,9 @@ import android.graphics.Rect;
 import com.example.fox_core.util.L;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_LEFT;
+import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_RIGHT;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 
 /**
@@ -79,21 +82,32 @@ public class Bullet implements IBulletListener {
     public void move() {
         L.e("bullet move");
         setPositionY(getPositionY() + 1);
-//        switch (getDir()) {
-//            case TANK_DIRECTION_UP:
-//                setPositionY(getPositionY() - 1);
-//                break;
-//            default:
-//                break;
-//        }
+        switch (getDir()) {
+            case TANK_DIRECTION_UP:
+                setPositionY(getPositionY() - 1);
+                break;
+            case TANK_DIRECTION_DOWN:
+                setPositionY(getPositionY() + 1);
+                break;
+            case TANK_DIRECTION_LEFT:
+                setPositionX(getPositionX() - 1);
+                break;
+            case TANK_DIRECTION_RIGHT:
+                setPositionX(getPositionX() + 1);
+            default:
+                break;
+        }
     }
 
     @Override
     public void drawBullet(Canvas canvas, Paint paint) {
-        L.e("bullet draw" );
-        int x = (getPositionX() - 1) + 1;
-        int y = (getPositionY() - 1) + 1;
-        Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
-        canvas.drawRect(rect, paint);
+        if (isExist()) {
+            L.e("bullet draw");
+
+            int x = (getPositionX() - 1) + 1;
+            int y = (getPositionY() - 1) + 1;
+            Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
+            canvas.drawRect(rect, paint);
+        }
     }
 }
