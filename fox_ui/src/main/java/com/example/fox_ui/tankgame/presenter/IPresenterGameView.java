@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.view.View;
 
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
 import com.example.fox_ui.tankgame.model.tank.EnemyTank;
 import com.example.fox_ui.tankgame.model.tank.HeroTank;
@@ -36,6 +37,12 @@ public interface IPresenterGameView {
      * @param enemyTankList
      */
     void initEnemyTanks(List<EnemyTank> enemyTankList);
+
+    /**
+     * 初始化障碍物
+     * @param obstacleWoods
+     */
+    void initObstacle(List<ObstacleWood> obstacleWoods);
 
     /**
      * 控制敌方坦克行走,射击

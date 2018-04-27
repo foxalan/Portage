@@ -14,6 +14,10 @@ public abstract class Obstacle implements IObstacleListener{
     private int mPositionY;
     private int mType;
 
+    public Obstacle(){
+
+    }
+
     public Obstacle(boolean isAlive, int mPositionX, int mPositionY, int mType) {
         this.isAlive = isAlive;
         this.mPositionX = mPositionX;

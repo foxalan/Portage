@@ -12,7 +12,7 @@ import com.example.fox_ui.tankgame.view.GamePanel;
  * @Author Alan
  * Date 2018/4/22 0022
  * Function
- * Issue
+ * Issue :1线程冲突，导致两个线程修改一个变量
  */
 
 public class TankFragment extends LatteDelegate implements View.OnClickListener{
@@ -51,7 +51,6 @@ public class TankFragment extends LatteDelegate implements View.OnClickListener{
             gamePanel.moveRight();
         } else if(i == R.id.btn_bullet){
             gamePanel.shutBullet();
-
         } else{
 
         }

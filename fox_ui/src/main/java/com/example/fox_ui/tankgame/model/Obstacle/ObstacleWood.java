@@ -15,8 +15,13 @@ import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 
 public class ObstacleWood extends Obstacle{
 
+
     public ObstacleWood(boolean isAlive, int mPositionX, int mPositionY, int mType) {
         super(isAlive, mPositionX, mPositionY, mType);
+    }
+
+    public ObstacleWood(){
+
     }
 
     @Override

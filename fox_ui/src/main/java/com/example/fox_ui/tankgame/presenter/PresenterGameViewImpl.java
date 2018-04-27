@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.view.View;
 
 import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
 import com.example.fox_ui.tankgame.model.tank.EnemyTank;
 import com.example.fox_ui.tankgame.model.tank.HeroTank;
@@ -76,6 +77,20 @@ public class PresenterGameViewImpl implements IPresenterGameView {
         enemyTankList.add(tank1);
         enemyTankList.add(tank2);
         enemyTankList.add(tank3);
+    }
+
+    @Override
+    public void initObstacle(List<ObstacleWood> obstacleWoods) {
+        for(int i = 30;i<35;i++){
+            for(int j = 30 ; j< 45;j++){
+                ObstacleWood wood = new ObstacleWood();
+                wood.setAlive(true);
+                wood.setmPositionX(i);
+                wood.setmPositionY(j);
+                wood.setmType(Constant.OBSTACLE_TYPE_EASY_DES);
+                obstacleWoods.add(wood);
+            }
+        }
     }
 
     @Override
