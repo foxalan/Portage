@@ -37,19 +37,19 @@ public class HeroTank extends Tank {
     }
 
     @Override
-    public void drawTank(Canvas canvas,Paint paint) {
+    public void drawTank(Canvas canvas, Paint paint) {
         switch (getDirection()) {
             case 0:
-                drawTankUp(canvas,paint);
+                drawTankUp(canvas, paint);
                 break;
             case 1:
-                drawTankLeft(canvas,paint);
+                drawTankLeft(canvas, paint);
                 break;
             case 2:
-                drawTankRight(canvas,paint);
+                drawTankRight(canvas, paint);
                 break;
             case 3:
-                drawTankDown(canvas,paint);
+                drawTankDown(canvas, paint);
                 break;
             default:
                 break;
@@ -86,19 +86,41 @@ public class HeroTank extends Tank {
         }
     }
 
+    private int dev = 2;
+
     @Override
     public Bullet shoutBullet() {
         L.e("hero tank set bullet");
         Bullet bullet = new Bullet();
         bullet.setDir(getDirection());
         bullet.setExist(true);
-        bullet.setPositionY(getPositionY());
-        bullet.setPositionX(getPositionX());
+        switch (getDirection()) {
+            case TANK_DIRECTION_UP:
+                bullet.setPositionY(getPositionY() - dev);
+                bullet.setPositionX(getPositionX());
+                break;
+            case TANK_DIRECTION_DOWN:
+                bullet.setPositionY(getPositionY() + dev);
+                bullet.setPositionX(getPositionX());
+                break;
+            case TANK_DIRECTION_LEFT:
+                bullet.setPositionY(getPositionY());
+                bullet.setPositionX(getPositionX() - dev);
+                break;
+            case TANK_DIRECTION_RIGHT:
+                bullet.setPositionY(getPositionY());
+                bullet.setPositionX(getPositionX() + dev);
+                break;
+            default:
+                break;
+
+        }
+
         bullet.setType(Constant.BULLET_TYPE_HERO);
         return bullet;
     }
 
-    private void drawTankUp(Canvas canvas,Paint paint) {
+    private void drawTankUp(Canvas canvas, Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
@@ -117,7 +139,7 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankDown(Canvas canvas ,Paint paint) {
+    private void drawTankDown(Canvas canvas, Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
@@ -136,7 +158,7 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankLeft(Canvas canvas,Paint paint) {
+    private void drawTankLeft(Canvas canvas, Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {
@@ -155,7 +177,7 @@ public class HeroTank extends Tank {
         }
     }
 
-    private void drawTankRight(Canvas canvas,Paint paint) {
+    private void drawTankRight(Canvas canvas, Paint paint) {
 
         for (int i = 0; i < mTanklength; i++) {
             for (int j = 0; j < mTanklength; j++) {

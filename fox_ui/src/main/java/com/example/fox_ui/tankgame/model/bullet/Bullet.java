@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
+import com.example.fox_ui.tankgame.constant.Constant;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
@@ -27,7 +28,7 @@ public class Bullet implements IBulletListener {
     private int mPositionY;
     private int mType;
 
-    public int getmype() {
+    public int getType() {
         return mType;
     }
 
@@ -39,11 +40,12 @@ public class Bullet implements IBulletListener {
 
     }
 
-    public Bullet(int mDir, boolean isExist, int mPositionX, int mPosetionY) {
+    @SuppressWarnings("unused")
+    public Bullet(int mDir, boolean isExist, int mPositionX, int mPositionY) {
         this.mDir = mDir;
         this.isExist = isExist;
         this.mPositionX = mPositionX;
-        this.mPositionY = mPosetionY;
+        this.mPositionY = mPositionY;
     }
 
     public int getDir() {
@@ -74,14 +76,16 @@ public class Bullet implements IBulletListener {
         return mPositionY;
     }
 
-    public void setPositionY(int mPosetionY) {
-        this.mPositionY = mPosetionY;
+    public void setPositionY(int positionY) {
+        this.mPositionY = positionY;
     }
 
     @Override
     public void move() {
-        L.e("bullet move");
-        setPositionY(getPositionY() + 1);
+        //判断移动
+        if (!isCanMove()){
+            return;
+        }
         switch (getDir()) {
             case TANK_DIRECTION_UP:
                 setPositionY(getPositionY() - 1);
@@ -94,9 +98,25 @@ public class Bullet implements IBulletListener {
                 break;
             case TANK_DIRECTION_RIGHT:
                 setPositionX(getPositionX() + 1);
+                break;
             default:
                 break;
         }
+    }
+
+    private boolean isCanMove() {
+
+        if (getPositionX() <= 0 || getPositionX() > Constant.RECT_COUNT_WIDTH) {
+            setExist(false);
+            return false;
+        }
+
+        if (getPositionY() <= 0 || getPositionY() > Constant.RECT_COUNT_HEIGHT) {
+            setExist(false);
+            return false;
+        }
+
+        return true;
     }
 
     @Override

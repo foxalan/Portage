@@ -83,10 +83,36 @@ public class EnemyTank extends Tank {
 
         }
     }
-
+    int dev = 1;
     @Override
     public Bullet shoutBullet() {
-        return null;
+        L.e("hero tank set bullet");
+        Bullet bullet = new Bullet();
+        bullet.setDir(getDirection());
+        bullet.setExist(true);
+        switch (getDirection()) {
+            case TANK_DIRECTION_UP:
+                bullet.setPositionY(getPositionY() - dev);
+                bullet.setPositionX(getPositionX());
+                break;
+            case TANK_DIRECTION_DOWN:
+                bullet.setPositionY(getPositionY() + dev);
+                bullet.setPositionX(getPositionX());
+                break;
+            case TANK_DIRECTION_LEFT:
+                bullet.setPositionY(getPositionY());
+                bullet.setPositionX(getPositionX() - dev);
+                break;
+            case TANK_DIRECTION_RIGHT:
+                bullet.setPositionY(getPositionY());
+                bullet.setPositionX(getPositionX() + dev);
+                break;
+            default:
+                break;
+
+        }
+        bullet.setType(Constant.BULLET_TYPE_Enemy);
+        return bullet;
     }
 
     private boolean canMove(int dir) {

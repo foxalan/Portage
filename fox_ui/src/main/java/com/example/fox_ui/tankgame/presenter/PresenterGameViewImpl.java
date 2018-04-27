@@ -79,7 +79,7 @@ public class PresenterGameViewImpl implements IPresenterGameView {
     }
 
     @Override
-    public void initEnemyTanksMove(final List<EnemyTank> enemyTankList, View view, final android.os.Handler mHandler) {
+    public void initEnemyTanksMove(final List<EnemyTank> enemyTankList, final List<Bullet> bulletList, final android.os.Handler mHandler) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -98,7 +98,7 @@ public class PresenterGameViewImpl implements IPresenterGameView {
                         enemyTank.setDirection(Constant.TANK_DIRECTION_RIGHT);
                     }
                     enemyTank.move(enemyTank.getDirection());
-
+                    bulletList.add(enemyTank.shoutBullet());
                 }
                 mHandler.sendEmptyMessage(MSG_INVALIDATE);
             }
@@ -113,11 +113,11 @@ public class PresenterGameViewImpl implements IPresenterGameView {
             public void run() {
                 for (Bullet bullet : bulletList) {
 
-                    bullet.move();
+                     bullet.move();
                 }
                 handler.sendEmptyMessage(MSG_INVALIDATE);
             }
-        }, 0, 1000);
+        }, 0, 500);
     }
 
 

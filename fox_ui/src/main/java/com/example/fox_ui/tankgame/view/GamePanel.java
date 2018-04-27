@@ -59,7 +59,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
                     invalidate();
                     break;
                 default:
-                        break;
+                    break;
             }
         }
     };
@@ -129,7 +129,9 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
 
     private void drawBullets(Canvas canvas) {
         for(Bullet bullet:mBulletList){
-            bullet.drawBullet(canvas,mHeroPaint);
+            if (bullet.isExist()){
+                bullet.drawBullet(canvas,mHeroPaint);
+            }
         }
     }
 
@@ -196,7 +198,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
      */
     @Override
     public void startGame() {
-       mInitImpl.initEnemyTanksMove(mEnemyTankList,this,mHandler);
+       mInitImpl.initEnemyTanksMove(mEnemyTankList,mBulletList,mHandler);
        mInitImpl.initBulletMove(mBulletList,mHandler);
     }
 

@@ -38,12 +38,12 @@ public interface IPresenterGameView {
     void initEnemyTanks(List<EnemyTank> enemyTankList);
 
     /**
-     * 控制敌方坦克行走
+     * 控制敌方坦克行走,射击
      * @param enemyTankList
-     * @param view
+     * @param bulletList
      * @param mHandler
      */
-    void initEnemyTanksMove(List<EnemyTank> enemyTankList, View view, Handler mHandler);
+    void initEnemyTanksMove(List<EnemyTank> enemyTankList, List<Bullet> bulletList, Handler mHandler);
 
     /**
      * 控制子弹的移动
