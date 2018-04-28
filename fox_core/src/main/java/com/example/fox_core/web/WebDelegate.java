@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.webkit.WebView;
-import android.webkit.WebViewFragment;
 
 import com.example.fox_core.fragment.LatteDelegate;
 
@@ -22,11 +21,14 @@ public abstract class WebDelegate extends LatteDelegate {
 
     private WebView mWebView = null;
     private String mUrl = null;
-    private final ReferenceQueue<WebView> WEB_VIEW_QUENE = new ReferenceQueue<>();
+    private final ReferenceQueue<WebView> WEB_VIEW_QUEUE = new ReferenceQueue<>();
     private boolean isWebViewAbailable;
 
 
-
+    /**
+     *
+     * @return
+     */
     public abstract IWebViewInit getWebViewInit();
 
     @Override
@@ -44,7 +46,7 @@ public abstract class WebDelegate extends LatteDelegate {
             final IWebViewInit iWebViewInit = getWebViewInit();
             if (iWebViewInit!=null){
 
-                WeakReference<WebView> weakReference = new WeakReference<WebView>(new WebView(getContext()),WEB_VIEW_QUENE);
+                WeakReference<WebView> weakReference = new WeakReference<>(new WebView(getContext()), WEB_VIEW_QUEUE);
                 mWebView = weakReference.get();
                 mWebView = getWebViewInit().initWebView(mWebView);
                 mWebView.setWebViewClient(getWebViewInit().initWebViewClient());

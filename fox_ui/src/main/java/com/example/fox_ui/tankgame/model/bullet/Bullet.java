@@ -6,6 +6,11 @@ import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
 import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
+import com.example.fox_ui.tankgame.model.tank.EnemyTank;
+import com.example.fox_ui.tankgame.model.tank.HeroTank;
+
+import java.util.List;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
@@ -81,9 +86,9 @@ public class Bullet implements IBulletListener {
     }
 
     @Override
-    public void move() {
+    public void move(List<EnemyTank> enemyTankList, HeroTank heroTank, List<ObstacleWood> obstacleWoodList) {
         //判断移动
-        if (!isCanMove()){
+        if (!isCanMove(enemyTankList, heroTank, obstacleWoodList)) {
             return;
         }
         switch (getDir()) {
@@ -104,7 +109,7 @@ public class Bullet implements IBulletListener {
         }
     }
 
-    private boolean isCanMove() {
+    private boolean isCanMove(List<EnemyTank> enemyTankList, HeroTank heroTank, List<ObstacleWood> obstacleWoodList) {
 
         if (getPositionX() <= 0 || getPositionX() > Constant.RECT_COUNT_WIDTH) {
             setExist(false);
@@ -115,15 +120,57 @@ public class Bullet implements IBulletListener {
             setExist(false);
             return false;
         }
-
+        if (getType() == Constant.BULLET_TYPE_Enemy) {
+            if (!heroTank.isAlive()){
+                return true;
+            }
+            switch (getDir()) {
+                case TANK_DIRECTION_UP:
+                    if (Math.abs(getPositionX()-heroTank.getPositionX())==2) {
+                        if ((getPositionY() - 1) == heroTank.getPositionY()) {
+                            L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
+                            setExist(false);
+                            heroTank.setAlive(false);
+                        }
+                    }
+                    break;
+                case TANK_DIRECTION_DOWN:
+                    if (getPositionX() == heroTank.getPositionX()) {
+                        if ((getPositionY() + 1) == heroTank.getPositionY()) {
+                            L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
+                            setExist(false);
+                            heroTank.setAlive(false);
+                        }
+                    }
+                    break;
+                case TANK_DIRECTION_LEFT:
+                    if (getPositionY() == heroTank.getPositionY()) {
+                        if (getDir() == TANK_DIRECTION_LEFT && (getPositionX() - 1) == heroTank.getPositionX()) {
+                            setExist(false);
+                            L.e(getDir() + "====" + getPositionX() + "=====" + heroTank.getPositionX());
+                            heroTank.setAlive(false);
+                        }
+                    }
+                    break;
+                case TANK_DIRECTION_RIGHT:
+                    if (getPositionY() == heroTank.getPositionY()) {
+                        if (getDir() == TANK_DIRECTION_LEFT && (getPositionX() + 1) == heroTank.getPositionX()) {
+                            setExist(false);
+                            L.e(getDir() + "====" + getPositionX() + "=====" + heroTank.getPositionX());
+                            heroTank.setAlive(false);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
         return true;
     }
 
     @Override
     public void drawBullet(Canvas canvas, Paint paint) {
         if (isExist()) {
-            L.e("bullet draw");
-
             int x = (getPositionX() - 1) + 1;
             int y = (getPositionY() - 1) + 1;
             Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);

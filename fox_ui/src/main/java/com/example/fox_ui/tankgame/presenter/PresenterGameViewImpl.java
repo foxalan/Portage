@@ -25,9 +25,18 @@ import static com.example.fox_ui.tankgame.constant.Constant.MSG_INVALIDATE;
  */
 
 public class PresenterGameViewImpl implements IPresenterGameView {
+    private HeroTank heroTank;
+    private List<EnemyTank> enemyTankList;
+    private List<ObstacleWood> obstacleWoods;
 
     public PresenterGameViewImpl() {
 
+    }
+
+    public PresenterGameViewImpl(HeroTank heroTank, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleWoods) {
+        this.heroTank = heroTank;
+        this.enemyTankList = enemyTankList;
+        this.obstacleWoods = obstacleWoods;
     }
 
     @Override
@@ -126,9 +135,8 @@ public class PresenterGameViewImpl implements IPresenterGameView {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                for (Bullet bullet : bulletList) {
-
-                     bullet.move();
+                for(int i =0;i<bulletList.size();i++){
+                    bulletList.get(i).move(enemyTankList,heroTank,obstacleWoods);
                 }
                 handler.sendEmptyMessage(MSG_INVALIDATE);
             }

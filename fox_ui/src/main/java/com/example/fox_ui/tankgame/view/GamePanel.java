@@ -46,7 +46,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     private Paint mHeroPaint;
     private Paint mEnemyPaint;
 
-    private HeroTank mHeroTank;
+    private volatile HeroTank mHeroTank;
     private List<EnemyTank> mEnemyTankList;
     private volatile List<Bullet> mBulletList;
     private List<ObstacleWood> mObstacleWoodList;
@@ -85,7 +85,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
      */
     private void init() {
         initPaints();
-        mInitImpl = new PresenterGameViewImpl();
+
         mPaint = new Paint();
 
         mHeroTank = new HeroTank();
@@ -93,6 +93,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
         mBulletList = new ArrayList<>();
         mObstacleWoodList = new ArrayList<>();
 
+        mInitImpl = new PresenterGameViewImpl(mHeroTank,mEnemyTankList,mObstacleWoodList);
         mInitImpl.initPaints(mPaint);
         mInitImpl.initHeroTank(mHeroTank);
         mInitImpl.initEnemyTanks(mEnemyTankList);
@@ -125,7 +126,9 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawRect(canvas);
-        mHeroTank.drawTank(canvas, mHeroPaint);
+        if (mHeroTank.isAlive()){
+            mHeroTank.drawTank(canvas, mHeroPaint);
+        }
         drawEnemyTanks(canvas);
         drawBullets(canvas);
         drawObstacle(canvas);
@@ -152,7 +155,9 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
      */
     private void drawEnemyTanks(Canvas canvas) {
         for (EnemyTank enemyTank : mEnemyTankList) {
-            enemyTank.drawTank(canvas, mEnemyPaint);
+            if (enemyTank.isAlive()){
+                enemyTank.drawTank(canvas, mEnemyPaint);
+            }
         }
     }
 

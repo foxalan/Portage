@@ -52,6 +52,8 @@ public class EnemyTank extends Tank {
 
     @Override
     public void move(int direction) {
+
+
         if (!canMove(direction)) {
             return;
         }
@@ -86,7 +88,7 @@ public class EnemyTank extends Tank {
     int dev = 1;
     @Override
     public Bullet shoutBullet() {
-        L.e("hero tank set bullet");
+//        L.e("hero tank set bullet");
         Bullet bullet = new Bullet();
         bullet.setDir(getDirection());
         bullet.setExist(true);
