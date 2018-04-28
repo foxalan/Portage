@@ -9,6 +9,7 @@ import com.example.fox_ui.tankgame.constant.Constant;
 import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.tank.EnemyTank;
 import com.example.fox_ui.tankgame.model.tank.HeroTank;
+import com.example.fox_ui.tankgame.model.tank.Tank;
 
 import java.util.List;
 
@@ -120,52 +121,77 @@ public class Bullet implements IBulletListener {
             setExist(false);
             return false;
         }
+        for(int i =0;i<obstacleWoodList.size();i++){
+            if (obstacleWoodList.get(i).getmPositionX()==getPositionX()){
+                if (obstacleWoodList.get(i).getmPositionY() == getPositionY()){
+                    obstacleWoodList.get(i).setAlive(false);
+                    setExist(false);
+                }
+            }
+        }
+
         if (getType() == Constant.BULLET_TYPE_Enemy) {
             if (!heroTank.isAlive()){
                 return true;
             }
-            switch (getDir()) {
-                case TANK_DIRECTION_UP:
-                    if (Math.abs(getPositionX()-heroTank.getPositionX())==2) {
-                        if ((getPositionY() - 1) == heroTank.getPositionY()) {
-                            L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
-                            setExist(false);
-                            heroTank.setAlive(false);
-                        }
-                    }
-                    break;
-                case TANK_DIRECTION_DOWN:
-                    if (getPositionX() == heroTank.getPositionX()) {
-                        if ((getPositionY() + 1) == heroTank.getPositionY()) {
-                            L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
-                            setExist(false);
-                            heroTank.setAlive(false);
-                        }
-                    }
-                    break;
-                case TANK_DIRECTION_LEFT:
-                    if (getPositionY() == heroTank.getPositionY()) {
-                        if (getDir() == TANK_DIRECTION_LEFT && (getPositionX() - 1) == heroTank.getPositionX()) {
-                            setExist(false);
-                            L.e(getDir() + "====" + getPositionX() + "=====" + heroTank.getPositionX());
-                            heroTank.setAlive(false);
-                        }
-                    }
-                    break;
-                case TANK_DIRECTION_RIGHT:
-                    if (getPositionY() == heroTank.getPositionY()) {
-                        if (getDir() == TANK_DIRECTION_LEFT && (getPositionX() + 1) == heroTank.getPositionX()) {
-                            setExist(false);
-                            L.e(getDir() + "====" + getPositionX() + "=====" + heroTank.getPositionX());
-                            heroTank.setAlive(false);
-                        }
-                    }
-                    break;
-                default:
-                    break;
+            setTouch(heroTank);
+
+        }else if(getType() == Constant.BULLET_TYPE_HERO){
+            for(int i =0;i<enemyTankList.size();i++){
+                if (!enemyTankList.get(i).isAlive()){
+                    continue;
+                }
+                setTouch(enemyTankList.get(i));
             }
         }
         return true;
+    }
+
+    /**
+     * 检测碰撞
+     * @param heroTank
+     */
+    private void setTouch(Tank heroTank){
+        switch (getDir()) {
+            case TANK_DIRECTION_UP:
+                if (Math.abs(getPositionX()-heroTank.getPositionX())==2) {
+                    if ((getPositionY() - 1) == heroTank.getPositionY()) {
+                        L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
+                        setExist(false);
+                        heroTank.setAlive(false);
+                    }
+                }
+                break;
+            case TANK_DIRECTION_DOWN:
+                if (getPositionX() == heroTank.getPositionX()) {
+                    if ((getPositionY() + 1) == heroTank.getPositionY()) {
+                        L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
+                        setExist(false);
+                        heroTank.setAlive(false);
+                    }
+                }
+                break;
+            case TANK_DIRECTION_LEFT:
+                if (getPositionY() == heroTank.getPositionY()) {
+                    if (getDir() == TANK_DIRECTION_LEFT && (getPositionX() - 1) == heroTank.getPositionX()) {
+                        setExist(false);
+                        L.e(getDir() + "====" + getPositionX() + "=====" + heroTank.getPositionX());
+                        heroTank.setAlive(false);
+                    }
+                }
+                break;
+            case TANK_DIRECTION_RIGHT:
+                if (getPositionY() == heroTank.getPositionY()) {
+                    if (getDir() == TANK_DIRECTION_LEFT && (getPositionX() + 1) == heroTank.getPositionX()) {
+                        setExist(false);
+                        L.e(getDir() + "====" + getPositionX() + "=====" + heroTank.getPositionX());
+                        heroTank.setAlive(false);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

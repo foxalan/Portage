@@ -12,8 +12,7 @@ import android.util.Log;
 public class L {
 
     private static final String CUT_OFF = "------------------------";
-    private static final String CUT_OFF_END = "----------------------" +
-            "--------------------------------------------------------";
+
 
 
     public static final String TAG = "tankgame";
@@ -49,11 +48,8 @@ public class L {
             if (element.getClassName().contains(tag)) {
                 //返回调用位置的 element
                 return element;
-
             }
-
         }
-
         return null;
     }
 
