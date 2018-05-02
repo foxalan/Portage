@@ -19,6 +19,9 @@ import java.util.List;
 public interface IBulletListener {
     /**
      * 移动
+     * @param enemyTankList
+     * @param heroTank
+     * @param obstacleWoodList
      */
     void move(List<EnemyTank> enemyTankList, HeroTank heroTank, List<ObstacleWood> obstacleWoodList);
 

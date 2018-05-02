@@ -20,7 +20,7 @@ public class WebViewFragment extends LatteDelegate {
 
     private LinearLayout mLinerContainer;
     private WebView mWebView;
-    private WebViewInitialize mWebViewInitalize;
+//    private WebViewInitialize mWebViewInitalize;
     private String url = "https://www.baidu.com/";
 
 
@@ -33,8 +33,8 @@ public class WebViewFragment extends LatteDelegate {
     public void onBindView(View rootView) {
         mLinerContainer = rootView.findViewById(R.id.ll_container);
         mWebView = new WebView(getContext());
-        mWebViewInitalize = new WebViewInitialize();
-        mWebViewInitalize.initWebSetting(mWebView);
+  //      mWebViewInitalize = new WebViewInitialize();
+  //      mWebViewInitalize.initWebSetting(mWebView);
         mWebView.setWebChromeClient(new WebChromeClient());
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.loadUrl(url);

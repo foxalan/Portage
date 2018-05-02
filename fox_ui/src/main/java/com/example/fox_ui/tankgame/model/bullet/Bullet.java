@@ -88,6 +88,11 @@ public class Bullet implements IBulletListener {
 
     @Override
     public void move(List<EnemyTank> enemyTankList, HeroTank heroTank, List<ObstacleWood> obstacleWoodList) {
+
+        if(!isExist()){
+            return;
+        }
+
         //判断移动
         if (!isCanMove(enemyTankList, heroTank, obstacleWoodList)) {
             return;
@@ -122,6 +127,9 @@ public class Bullet implements IBulletListener {
             return false;
         }
         for(int i =0;i<obstacleWoodList.size();i++){
+            if(!obstacleWoodList.get(i).isAlive()){
+                continue;
+            }
             if (obstacleWoodList.get(i).getmPositionX()==getPositionX()){
                 if (obstacleWoodList.get(i).getmPositionY() == getPositionY()){
                     obstacleWoodList.get(i).setAlive(false);
@@ -151,10 +159,11 @@ public class Bullet implements IBulletListener {
      * 检测碰撞
      * @param heroTank
      */
+    int magic = 2;
     private void setTouch(Tank heroTank){
         switch (getDir()) {
             case TANK_DIRECTION_UP:
-                if (Math.abs(getPositionX()-heroTank.getPositionX())==2) {
+                if (Math.abs(getPositionX()-heroTank.getPositionX())==magic) {
                     if ((getPositionY() - 1) == heroTank.getPositionY()) {
                         L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
                         setExist(false);

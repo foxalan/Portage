@@ -39,7 +39,11 @@ abstract class BaseDelegate extends SwipeBackFragment {
 
         if (rootView != null) {
 
-            onBindView(rootView);
+            try {
+                onBindView(rootView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return rootView;
