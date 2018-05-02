@@ -86,7 +86,7 @@ public class HeroTank extends Tank {
         }
     }
 
-    private int dev = 2;
+    private int dev = 1;
 
     @Override
     public Bullet shoutBullet() {
@@ -97,7 +97,9 @@ public class HeroTank extends Tank {
         switch (getDirection()) {
             case TANK_DIRECTION_UP:
                 bullet.setPositionY(getPositionY() - dev);
-                bullet.setPositionX(getPositionX());
+                bullet.setPositionX(getPositionX() );
+
+
                 break;
             case TANK_DIRECTION_DOWN:
                 bullet.setPositionY(getPositionY() + dev);

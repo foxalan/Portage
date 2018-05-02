@@ -94,34 +94,37 @@ public class Bullet implements IBulletListener {
         }
 
         //判断移动
-        if (!isCanMove(enemyTankList, heroTank, obstacleWoodList)) {
+        if (!isTouch(enemyTankList, heroTank, obstacleWoodList)) {
             return;
         }
-        switch (getDir()) {
-            case TANK_DIRECTION_UP:
-                setPositionY(getPositionY() - 1);
-                break;
-            case TANK_DIRECTION_DOWN:
-                setPositionY(getPositionY() + 1);
-                break;
-            case TANK_DIRECTION_LEFT:
-                setPositionX(getPositionX() - 1);
-                break;
-            case TANK_DIRECTION_RIGHT:
-                setPositionX(getPositionX() + 1);
-                break;
-            default:
-                break;
+
+        if (isExist()){
+
+            switch (getDir()) {
+                case TANK_DIRECTION_UP:
+                    setPositionY(getPositionY() - 1);
+                    break;
+                case TANK_DIRECTION_DOWN:
+                    setPositionY(getPositionY() + 1);
+                    break;
+                case TANK_DIRECTION_LEFT:
+                    setPositionX(getPositionX() - 1);
+                    break;
+                case TANK_DIRECTION_RIGHT:
+                    setPositionX(getPositionX() + 1);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    private boolean isCanMove(List<EnemyTank> enemyTankList, HeroTank heroTank, List<ObstacleWood> obstacleWoodList) {
+    private boolean isTouch(List<EnemyTank> enemyTankList, HeroTank heroTank, List<ObstacleWood> obstacleWoodList) {
 
         if (getPositionX() <= 0 || getPositionX() > Constant.RECT_COUNT_WIDTH) {
             setExist(false);
             return false;
         }
-
         if (getPositionY() <= 0 || getPositionY() > Constant.RECT_COUNT_HEIGHT) {
             setExist(false);
             return false;
@@ -206,8 +209,8 @@ public class Bullet implements IBulletListener {
     @Override
     public void drawBullet(Canvas canvas, Paint paint) {
         if (isExist()) {
-            int x = (getPositionX() - 1) + 1;
-            int y = (getPositionY() - 1) + 1;
+            int x = (getPositionX() - 1);
+            int y = (getPositionY() - 1);
             Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
             canvas.drawRect(rect, paint);
         }
