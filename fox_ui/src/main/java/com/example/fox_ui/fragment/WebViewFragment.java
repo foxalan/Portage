@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 
 import com.example.fox_core.fragment.LatteDelegate;
 import com.example.fox_ui.R;
-import com.example.fox_ui.webview.WebViewInitialize;
 
 /**
  * @Author Alan
