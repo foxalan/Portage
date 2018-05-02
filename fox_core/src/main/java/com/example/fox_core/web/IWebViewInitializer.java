@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
  * Issue
  */
 
-public interface IWebViewInit {
+public interface IWebViewInitializer {
     /**
      * 初始化WebView
      * @param webView

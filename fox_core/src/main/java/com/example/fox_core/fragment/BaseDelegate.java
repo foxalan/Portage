@@ -21,7 +21,7 @@ abstract class BaseDelegate extends SwipeBackFragment {
     /**
      * 處理事件
      */
-    public abstract void onBindView(View rootView);
+    public abstract void onBindView(View rootView) throws Exception;
 
     @Nullable
     @Override
