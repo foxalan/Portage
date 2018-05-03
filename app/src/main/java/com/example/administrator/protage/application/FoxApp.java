@@ -1,8 +1,10 @@
 package com.example.administrator.protage.application;
 
 import android.app.Application;
+import android.os.Handler;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.example.fox_core.app.Latte;
 
 /**
  * @Author Alan
@@ -13,10 +15,17 @@ import com.baidu.mapapi.SDKInitializer;
 
 public class FoxApp extends Application {
 
+    private static final Handler HANDLER = new Handler();
+
     @Override
     public void onCreate() {
         super.onCreate();
         //百度地图
-//        SDKInitializer.initialize(getApplicationContext());
+        //SDKInitializer.initialize(getApplicationContext());
+        Latte.init()
+                .withApiHost("本地服务器")
+                .withContext(this)
+                .withHandler(HANDLER)
+                .configure();
     }
 }
