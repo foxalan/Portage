@@ -5,6 +5,8 @@ import android.os.Handler;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.fox_core.app.Latte;
+import com.example.fox_ec.icons.FontEcModule;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 /**
  * @Author Alan
@@ -22,10 +24,14 @@ public class FoxApp extends Application {
         super.onCreate();
         //百度地图
         //SDKInitializer.initialize(getApplicationContext());
+
         Latte.init()
                 .withApiHost("本地服务器")
                 .withContext(this)
                 .withHandler(HANDLER)
+                .withIcon(new FontAwesomeModule())
+                .withIcon(new FontEcModule())
                 .configure();
+
     }
 }

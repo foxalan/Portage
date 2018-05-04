@@ -32,8 +32,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation project(':fox_ui')
-    implementation project(':fox_core')
-
+    //动态权限请求
     compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
+    implementation project(':fox_ec')
+    implementation project(':fox_core')
+    implementation project(':fox_ui')
 }

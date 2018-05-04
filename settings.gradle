@@ -1,1 +1,1 @@
-include ':app', ':fox_ui', ':fox_core'
+include ':app', ':fox_ui', ':fox_core', ':fox_ec'

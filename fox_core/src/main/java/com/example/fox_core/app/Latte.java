@@ -3,6 +3,9 @@ package com.example.fox_core.app;
 import android.content.Context;
 import android.os.Handler;
 
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+
 /**
  * @Author Alan
  * Date 2018/5/3 0003
@@ -25,6 +28,8 @@ public class Latte {
     }
 
     public static Context getApplicationContext() {
+
+
         return getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
     }
 
