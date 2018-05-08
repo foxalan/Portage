@@ -51,11 +51,11 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     private volatile List<Bullet> mBulletList;
     private List<ObstacleWood> mObstacleWoodList;
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case MSG_INVALIDATE:
                     invalidate();
                     break;
@@ -93,7 +93,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
         mBulletList = new ArrayList<>();
         mObstacleWoodList = new ArrayList<>();
 
-        mInitImpl = new PresenterGameViewImpl(mHeroTank,mEnemyTankList,mObstacleWoodList);
+        mInitImpl = new PresenterGameViewImpl(mHeroTank, mEnemyTankList, mObstacleWoodList);
         mInitImpl.initPaints(mPaint);
         mInitImpl.initHeroTank(mHeroTank);
         mInitImpl.initEnemyTanks(mEnemyTankList);
@@ -126,7 +126,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawRect(canvas);
-        if (mHeroTank.isAlive()){
+        if (mHeroTank.isAlive()) {
             mHeroTank.drawTank(canvas, mHeroPaint);
         }
         drawEnemyTanks(canvas);
@@ -135,29 +135,26 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     }
 
     private void drawObstacle(Canvas canvas) {
-        for(ObstacleWood wood:mObstacleWoodList){
-            wood.draw(canvas,mEnemyPaint);
+        for (ObstacleWood wood : mObstacleWoodList) {
+            wood.draw(canvas, mEnemyPaint);
         }
     }
 
     private void drawBullets(Canvas canvas) {
-        for(Bullet bullet:mBulletList){
-            if (bullet.isExist()){
-                bullet.drawBullet(canvas,mHeroPaint);
-            }
+        for (Bullet bullet : mBulletList) {
+            bullet.drawBullet(canvas, mHeroPaint);
         }
     }
 
 
     /**
      * 画敌方
+     *
      * @param canvas
      */
     private void drawEnemyTanks(Canvas canvas) {
         for (EnemyTank enemyTank : mEnemyTankList) {
-            if (enemyTank.isAlive()){
-                enemyTank.drawTank(canvas, mEnemyPaint);
-            }
+            enemyTank.drawTank(canvas, mEnemyPaint);
         }
     }
 
@@ -202,19 +199,30 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
         invalidate();
     }
 
+    private long currentTimeMillis;
+    private long lastTimeMills = 0;
+    private long intervalTime = 2000;
+
+    /**
+     * 设置两次发射子弹的时间为0.2s
+     */
     @Override
     public void shutBullet() {
-        mBulletList.add(mHeroTank.shoutBullet());
+        currentTimeMillis = System.currentTimeMillis();
+        if ((currentTimeMillis - lastTimeMills) >= intervalTime) {
+            mBulletList.add(mHeroTank.shoutBullet());
+            lastTimeMills = currentTimeMillis;
+        }
     }
 
     /**
-     *待优化
+     * 待优化
      * 不能在非UI线程中更新UI
      */
     @Override
     public void startGame() {
-       mInitImpl.initEnemyTanksMove(mEnemyTankList,mBulletList,mHandler);
-       mInitImpl.initBulletMove(mBulletList,mHandler);
+        mInitImpl.initEnemyTanksMove(mEnemyTankList, mBulletList, mHandler);
+        mInitImpl.initBulletMove(mBulletList, mHandler);
     }
 
     @Override

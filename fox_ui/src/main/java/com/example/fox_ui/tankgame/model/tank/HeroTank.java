@@ -78,7 +78,6 @@ public class HeroTank extends Tank {
             case TANK_DIRECTION_RIGHT:
                 setDirection(TANK_DIRECTION_RIGHT);
                 setPositionX(getPositionX() + 1);
-                L.e("move right");
                 break;
             default:
                 break;
@@ -90,7 +89,7 @@ public class HeroTank extends Tank {
 
     @Override
     public Bullet shoutBullet() {
-        L.e("hero tank set bullet");
+
         Bullet bullet = new Bullet();
         bullet.setDir(getDirection());
         bullet.setExist(true);
@@ -98,8 +97,6 @@ public class HeroTank extends Tank {
             case TANK_DIRECTION_UP:
                 bullet.setPositionY(getPositionY() - dev);
                 bullet.setPositionX(getPositionX() );
-
-
                 break;
             case TANK_DIRECTION_DOWN:
                 bullet.setPositionY(getPositionY() + dev);

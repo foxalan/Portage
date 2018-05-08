@@ -21,7 +21,7 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_move_up"
-            android:background="@drawable/bg_btn"
+            android:background="@drawable/bg_btn_game_tank"
             android:padding="5dp"
             android:layout_margin="5dp"
             android:text="上"
@@ -30,7 +30,7 @@
             android:layout_height="40dp" />
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_move_down"
-            android:background="@drawable/bg_btn"
+            android:background="@drawable/bg_btn_game_tank"
             android:padding="5dp"
             android:layout_margin="5dp"
             android:text="下"
@@ -40,7 +40,7 @@
              />
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_move_left"
-            android:background="@drawable/bg_btn"
+            android:background="@drawable/bg_btn_game_tank"
             android:padding="5dp"
             android:layout_margin="5dp"
             android:text="左"
@@ -50,7 +50,7 @@
             />
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_move_right"
-            android:background="@drawable/bg_btn"
+            android:background="@drawable/bg_btn_game_tank"
             android:padding="5dp"
             android:layout_margin="5dp"
             android:text="右"
@@ -59,7 +59,7 @@
             android:layout_height="40dp" />
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_bullet"
-            android:background="@drawable/bg_btn"
+            android:background="@drawable/bg_btn_game_tank"
             android:padding="5dp"
             android:layout_margin="5dp"
             android:text="大"

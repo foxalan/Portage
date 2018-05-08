@@ -75,7 +75,7 @@ public abstract class ProxyActivity  extends AppCompatActivity implements ISuppo
 
     @Override
     public FragmentAnimator onCreateFragmentAnimator() {
-        return DELEGATE.getFragmentAnimator();
+        return DELEGATE.onCreateFragmentAnimator();
     }
 
     @Override

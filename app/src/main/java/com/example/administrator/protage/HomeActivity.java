@@ -31,6 +31,5 @@ public class HomeActivity extends PermissionsActivity {
     @Override
     public void permissionSuccess(int requestCode) {
         super.permissionSuccess(requestCode);
-
     }
 }

@@ -209,8 +209,8 @@ public class Bullet implements IBulletListener {
     @Override
     public void drawBullet(Canvas canvas, Paint paint) {
         if (isExist()) {
-            int x = (getPositionX() - 1);
-            int y = (getPositionY() - 1);
+            int x = getPositionX();
+            int y = getPositionY();
             Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
             canvas.drawRect(rect, paint);
         }

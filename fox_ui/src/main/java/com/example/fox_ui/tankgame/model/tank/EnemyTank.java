@@ -32,21 +32,24 @@ public class EnemyTank extends Tank {
 
     @Override
     public void drawTank(Canvas canvas, Paint paint) {
-        switch (getDirection()) {
-            case 0:
-                drawTankUp(canvas, paint);
-                break;
-            case 1:
-                drawTankLeft(canvas, paint);
-                break;
-            case 2:
-                drawTankRight(canvas, paint);
-                break;
-            case 3:
-                drawTankDown(canvas, paint);
-                break;
-            default:
-                break;
+        if (isAlive()){
+
+            switch (getDirection()) {
+                case 0:
+                    drawTankUp(canvas, paint);
+                    break;
+                case 1:
+                    drawTankLeft(canvas, paint);
+                    break;
+                case 2:
+                    drawTankRight(canvas, paint);
+                    break;
+                case 3:
+                    drawTankDown(canvas, paint);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
