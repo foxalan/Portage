@@ -120,8 +120,6 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
         DELEGATE.setUserVisibleHint(isVisibleToUser);
     }
 
-
-
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
         return DELEGATE;
