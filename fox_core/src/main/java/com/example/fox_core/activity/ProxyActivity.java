@@ -1,10 +1,11 @@
-package com.example.administrator.protage;
+package com.example.fox_core.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ContentFrameLayout;
 
+import com.example.fox_core.R;
 import com.example.fox_core.fragment.LatteDelegate;
 
 import me.yokeyword.fragmentation.ExtraTransaction;

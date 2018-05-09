@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.example.fox_core.fragment.LatteDelegate;
+import com.example.fox_ec.icons.launcher.LauncherScrollDelegate;
 import com.example.fox_ui.tankgame.TankFragment;
 
 /**
@@ -25,7 +26,9 @@ public class HomeActivity extends PermissionsActivity {
     public LatteDelegate setRootDelegate() {
         //请求读写权限
      //   requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 0x0002);
-        return new TankFragment();
+     //   return new TankFragment();
+
+        return new LauncherScrollDelegate();
     }
 
     @Override

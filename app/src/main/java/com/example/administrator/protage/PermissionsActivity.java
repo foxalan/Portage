@@ -12,6 +12,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.example.fox_core.activity.ProxyActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
