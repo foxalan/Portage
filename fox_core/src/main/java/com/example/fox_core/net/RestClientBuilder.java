@@ -1,9 +1,12 @@
 package com.example.fox_core.net;
 
+import android.content.Context;
+
 import com.example.fox_core.net.callback.IError;
 import com.example.fox_core.net.callback.IFailure;
 import com.example.fox_core.net.callback.IRequest;
 import com.example.fox_core.net.callback.ISuccess;
+import com.example.fox_core.ui.loader.LoaderStyle;
 
 import java.util.WeakHashMap;
 
@@ -24,6 +27,8 @@ public class RestClientBuilder {
     private ISuccess mISuccess;
     private IFailure mIFailure;
     private IError mIError;
+    private LoaderStyle mLoaderStyle;
+    private Context mContext;
     private IRequest mIRequest;
     private RequestBody mBody = null;
 
@@ -66,8 +71,20 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder loader(Context context, LoaderStyle style) {
+        this.mContext = context;
+        this.mLoaderStyle = style;
+        return this;
+    }
+
+    public final RestClientBuilder loader(Context context) {
+        this.mContext = context;
+        this.mLoaderStyle = LoaderStyle.BallClipRotatePulseIndicator;
+        return this;
+    }
+
 
     public RestClient build() {
-        return new RestClient(mUrl, PARAMS, mISuccess, mIFailure, mIError, mIRequest, mBody);
+        return new RestClient(mUrl, PARAMS, mISuccess, mIFailure, mIError, mLoaderStyle, mContext, mIRequest, mBody);
     }
 }

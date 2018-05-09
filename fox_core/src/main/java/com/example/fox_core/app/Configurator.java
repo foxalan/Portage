@@ -28,7 +28,7 @@ public class Configurator {
     /**
      * 内部类单例模式
      */
-    static class Holder {
+    private static class Holder {
         private static final Configurator INSTANCE = new Configurator();
 
     }
@@ -59,15 +59,15 @@ public class Configurator {
         return this;
     }
 
+    public Configurator withLoaderDelayed(long delayed){
+        LATTE_CONFIGS.put(ConfigKeys.LOADER_DELAYED.name(),delayed);
+        return this;
+    }
+
     public final Configurator withIcon(IconFontDescriptor descriptor) {
         ICONS.add(descriptor);
         return this;
     }
-
-
-
-
-
 
 
     @SuppressWarnings("unchecked")

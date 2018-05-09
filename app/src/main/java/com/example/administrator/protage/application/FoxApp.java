@@ -12,7 +12,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
  * @Author Alan
  * Date 2018/3/27 0027
  * Function 用于初始化应用启动时的一些数据
- * Issue
+ * Issue 1.Loader不是全部理解
  */
 
 public class FoxApp extends Application {
@@ -31,6 +31,7 @@ public class FoxApp extends Application {
                 .withHandler(HANDLER)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
+                .withLoaderDelayed(1000)
                 .configure();
 
     }

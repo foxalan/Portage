@@ -33,6 +33,10 @@ public class TankFragment extends LatteDelegate implements View.OnClickListener{
         rootView.findViewById(R.id.btn_bullet).setOnClickListener(this);
 
         gamePanel.startGame();
+
+
+
+
     }
 
     @Override
