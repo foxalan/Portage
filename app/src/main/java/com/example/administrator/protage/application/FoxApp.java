@@ -13,6 +13,8 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
  * Date 2018/3/27 0027
  * Function 用于初始化应用启动时的一些数据
  * Issue 1.Loader不是全部理解
+ *       2.Fragment没有完善
+ *       3.网络请求没有完善
  */
 
 public class FoxApp extends Application {

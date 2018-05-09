@@ -32,7 +32,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':fox_core')
 
-
+    //Banner依赖
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 
 
 }
