@@ -36,13 +36,18 @@ public class RestClientBuilder {
 
     }
 
-    private RestClientBuilder setUrl(String url) {
+    public RestClientBuilder setUrl(String url) {
         this.mUrl = url;
         return this;
     }
 
     public final RestClientBuilder params(WeakHashMap<String, Object> params) {
         PARAMS.putAll(params);
+        return this;
+    }
+
+    public final RestClientBuilder params(String key, Object value) {
+        PARAMS.put(key, value);
         return this;
     }
 
@@ -87,4 +92,6 @@ public class RestClientBuilder {
     public RestClient build() {
         return new RestClient(mUrl, PARAMS, mISuccess, mIFailure, mIError, mLoaderStyle, mContext, mIRequest, mBody);
     }
+
+
 }

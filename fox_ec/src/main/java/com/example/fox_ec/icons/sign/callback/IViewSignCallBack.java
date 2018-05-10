@@ -27,7 +27,7 @@ public interface IViewSignCallBack {
     /**
      * 密码格式不正确
      */
-    void onPasswrodFormatError();
+    void onPasswordFormatError();
 
 
     /**
