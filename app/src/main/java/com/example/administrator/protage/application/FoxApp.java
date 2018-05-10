@@ -15,6 +15,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
  * Issue 1.Loader不是全部理解
  *       2.Fragment没有完善
  *       3.网络请求没有完善
+ *       4.用户登入，注册模块
  */
 
 public class FoxApp extends Application {
