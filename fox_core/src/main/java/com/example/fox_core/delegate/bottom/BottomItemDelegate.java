@@ -1,19 +1,11 @@
 package com.example.fox_core.delegate.bottom;
 
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.fox_core.R;
-import com.example.fox_core.delegate.BottomItemBean;
+import com.example.fox_core.app.Latte;
 import com.example.fox_core.fragment.LatteDelegate;
-import com.joanzapata.iconify.widget.IconTextView;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 /**
  * @Author Alan
@@ -24,61 +16,20 @@ import java.util.Map;
 
 public abstract class BottomItemDelegate extends LatteDelegate {
 
-
-    private FrameLayout mFrameLayout;
-    private LinearLayoutCompat mLinnerLayountCompat;
-
-    private HashMap<BottomItemBean,BottomItemDelegate> bottomItemDelegateHashMap = new HashMap<>();
-    private LinkedList<BottomItemBean> bottomItemBeans = new LinkedList<>();
-    private LinkedList<BottomItemDelegate> bottomItemDelegates = new LinkedList<>();
-
     /**
-     * 获取数据源
-     * @return
+     * 两次点击的间隔
      */
-    public abstract HashMap<BottomItemBean,BottomItemDelegate> getData();
-
-
+    private static final long WAIT_TIME = 2000L;
+    private long TOUCH_TIME = 0;
     @Override
-    public Object getLayout() {
-        return R.layout.delegate_bottom;
-    }
+    public boolean onBackPressedSupport() {
 
-    @Override
-    public void onBindView(View rootView) throws Exception {
-        mLinnerLayountCompat = rootView.findViewById(R.id.ll_bottom_container);
-
-        initData();
-    }
-
-    private void initData(){
-        bottomItemDelegateHashMap = getData();
-        //获取数据
-        for (Map.Entry<BottomItemBean, BottomItemDelegate> item : bottomItemDelegateHashMap.entrySet()) {
-            final BottomItemBean key = item.getKey();
-            final BottomItemDelegate value = item.getValue();
-            bottomItemBeans.add(key);
-            bottomItemDelegates.add(value);
+        if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME) {
+            _mActivity.finish();
+        } else {
+            TOUCH_TIME = System.currentTimeMillis();
+            Toast.makeText(_mActivity, "双击退出" + Latte.getApplicationContext().getString(R.string.app_name), Toast.LENGTH_SHORT).show();
         }
-
-        setBottomView();
-    }
-
-    /**
-     * 设置底部View
-     */
-    private void setBottomView(){
-
-
-        for(BottomItemBean itemBean:bottomItemBeans){
-            View itemView = LayoutInflater.from(getContext()).inflate(R.layout.view_bottom_item,mLinnerLayountCompat);
-            IconTextView iconTextView = itemView.findViewById(R.id.itv_icon_item);
-            AppCompatTextView compatTextView = itemView.findViewById(R.id.itv_title_item);
-            iconTextView.setText(itemBean.getIcon());
-            compatTextView.setText(itemBean.getTitle());
-
-            mLinnerLayountCompat.addView(itemView);
-        }
-
+        return true;
     }
 }
