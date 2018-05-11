@@ -37,4 +37,6 @@ dependencies {
     implementation project(':fox_ec')
     implementation project(':fox_core')
     implementation project(':fox_ui')
+
+    compile 'com.android.support:design:25.3.1'
 }
