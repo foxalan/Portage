@@ -226,7 +226,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
      */
     @Override
     public void startGame() {
-        mInitImpl.initEnemyTanksMove(mEnemyTankList, mBulletList, mHandler);
+        mInitImpl.initEnemyTanksMove(mEnemyTankList, mBulletList, mObstacleWoodList, mHandler);
         mInitImpl.initBulletMove(mBulletList, mHandler);
     }
 

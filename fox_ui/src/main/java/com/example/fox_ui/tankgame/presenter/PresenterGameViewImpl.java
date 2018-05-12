@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleCreater;
 import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
 import com.example.fox_ui.tankgame.model.tank.EnemyTank;
@@ -24,6 +25,7 @@ import static com.example.fox_ui.tankgame.constant.Constant.MSG_INVALIDATE;
  */
 
 public class PresenterGameViewImpl implements IPresenterGameView {
+
     private HeroTank heroTank;
     private List<EnemyTank> enemyTankList;
     private List<ObstacleWood> obstacleWoods;
@@ -89,20 +91,11 @@ public class PresenterGameViewImpl implements IPresenterGameView {
 
     @Override
     public void initObstacle(List<ObstacleWood> obstacleWoods) {
-        for(int i = 30;i<35;i++){
-            for(int j = 30 ; j< 45;j++){
-                ObstacleWood wood = new ObstacleWood();
-                wood.setAlive(true);
-                wood.setPositionX(i);
-                wood.setPositionY(j);
-                wood.setType(Constant.OBSTACLE_TYPE_EASY_DES);
-                obstacleWoods.add(wood);
-            }
-        }
+       obstacleWoods.addAll(ObstacleCreater.create());
     }
 
     @Override
-    public void initEnemyTanksMove(final List<EnemyTank> enemyTankList, final List<Bullet> bulletList, final android.os.Handler mHandler) {
+    public void initEnemyTanksMove(final List<EnemyTank> enemyTankList, final List<Bullet> bulletList, final List<ObstacleWood> obstacleWoodList, final android.os.Handler mHandler) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -120,7 +113,7 @@ public class PresenterGameViewImpl implements IPresenterGameView {
                     } else {
                         enemyTank.setDirection(Constant.TANK_DIRECTION_RIGHT);
                     }
-                    enemyTank.move(enemyTank.getDirection());
+                    enemyTank.move(enemyTank.getDirection(),enemyTankList,obstacleWoodList);
                     bulletList.add(enemyTank.shoutBullet());
                 }
                 mHandler.sendEmptyMessage(MSG_INVALIDATE);

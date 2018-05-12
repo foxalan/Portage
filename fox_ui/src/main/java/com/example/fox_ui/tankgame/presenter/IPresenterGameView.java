@@ -49,8 +49,9 @@ public interface IPresenterGameView {
      * @param enemyTankList
      * @param bulletList
      * @param mHandler
+     *
      */
-    void initEnemyTanksMove(List<EnemyTank> enemyTankList, List<Bullet> bulletList, Handler mHandler);
+    void initEnemyTanksMove(List<EnemyTank> enemyTankList, List<Bullet> bulletList,List<ObstacleWood> obstacleWoodList, Handler mHandler);
 
     /**
      * 控制子弹的移动

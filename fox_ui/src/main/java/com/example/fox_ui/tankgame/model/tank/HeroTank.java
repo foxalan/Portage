@@ -7,7 +7,6 @@ import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
 import com.example.fox_ui.tankgame.constant.Constant;
-import com.example.fox_ui.tankgame.model.Obstacle.Obstacle;
 import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
 
@@ -29,6 +28,9 @@ import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_UP;
 public class HeroTank extends Tank {
 
     private int mTanklength = 3;
+    private int len = 3;
+    private int tan = 2;
+    private int dev = 1;
 
     public HeroTank() {
 
@@ -68,7 +70,7 @@ public class HeroTank extends Tank {
             return;
         }
 
-        if (isCanMove(direction, enemyTankList, obstacleList)) {
+        if (!isCanMove(direction, enemyTankList, obstacleList)) {
             return;
         }
 
@@ -99,29 +101,20 @@ public class HeroTank extends Tank {
         }
     }
 
-    /**
-     * 判断是否可以移动
-     *
-     * @param enemyTankList
-     * @param obstacleList
-     * @return
-     */
-    private int len = 2;
 
     private boolean isCanMove(int dir, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleList) {
-
 
         switch (dir) {
             case TANK_DIRECTION_DOWN:
                 for (EnemyTank enemyTank : enemyTankList) {
-                    if (enemyTank.getPositionX() == getPositionX()) {
+                    if (Math.abs(enemyTank.getPositionX() - getPositionX()) <= tan) {
                         if ((enemyTank.getPositionY() - getPositionY()) == len) {
                             return false;
                         }
                     }
                 }
 
-                for(ObstacleWood wood:obstacleList){
+                for (ObstacleWood wood : obstacleList) {
                     if (wood.getPositionX() == getPositionX()) {
                         if ((wood.getPositionY() - getPositionY()) == len) {
                             return false;
@@ -132,14 +125,14 @@ public class HeroTank extends Tank {
                 break;
             case TANK_DIRECTION_UP:
                 for (EnemyTank enemyTank : enemyTankList) {
-                    if (enemyTank.getPositionX() == getPositionX()) {
+                    if (Math.abs(enemyTank.getPositionX() - getPositionX()) <= tan) {
                         if ((enemyTank.getPositionY() - getPositionY()) == -len) {
                             return false;
                         }
                     }
                 }
 
-                for(ObstacleWood wood:obstacleList){
+                for (ObstacleWood wood : obstacleList) {
                     if (wood.getPositionX() == getPositionX()) {
                         if ((wood.getPositionY() - getPositionY()) == -len) {
                             return false;
@@ -150,14 +143,14 @@ public class HeroTank extends Tank {
 
             case TANK_DIRECTION_LEFT:
                 for (EnemyTank enemyTank : enemyTankList) {
-                    if (enemyTank.getPositionY() == getPositionY()) {
+                    if (Math.abs(enemyTank.getPositionY() - getPositionY()) <= tan) {
                         if ((enemyTank.getPositionX() - getPositionX()) == -len) {
                             return false;
                         }
                     }
                 }
 
-                for(ObstacleWood wood:obstacleList){
+                for (ObstacleWood wood : obstacleList) {
                     if (wood.getPositionY() == getPositionY()) {
                         if ((wood.getPositionX() - getPositionX()) == -len) {
                             return false;
@@ -168,14 +161,14 @@ public class HeroTank extends Tank {
 
             case TANK_DIRECTION_RIGHT:
                 for (EnemyTank enemyTank : enemyTankList) {
-                    if (enemyTank.getPositionY() == getPositionY()) {
+                    if (Math.abs(enemyTank.getPositionY() - getPositionY()) <= tan) {
                         if ((enemyTank.getPositionX() - getPositionX()) == len) {
                             return false;
                         }
                     }
                 }
 
-                for(ObstacleWood wood:obstacleList){
+                for (ObstacleWood wood : obstacleList) {
                     if (wood.getPositionY() == getPositionY()) {
                         if ((wood.getPositionX() - getPositionX()) == len) {
                             return false;
@@ -186,11 +179,10 @@ public class HeroTank extends Tank {
             default:
                 break;
         }
-
         return true;
     }
 
-    private int dev = 1;
+
 
     @Override
     public Bullet shoutBullet() {

@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.fox_core.fragment.LatteDelegate;
 import com.example.fox_ec.R;
+import com.example.fox_ec.icons.main.EcBottomDelegate;
 import com.example.fox_ec.icons.sign.callback.IViewSignCallBack;
 import com.example.fox_ec.icons.sign.presenter.SignInPresenter;
 
@@ -92,5 +93,6 @@ public class SignInDelegate extends LatteDelegate implements IViewSignCallBack{
     @Override
     public void onSuccess() {
         setErrorNull();
+        getSupportDelegate().startWithPop(new EcBottomDelegate());
     }
 }

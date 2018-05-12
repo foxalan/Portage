@@ -29,6 +29,9 @@ public interface ITankListener {
     /**
      * 坦克的移动
      * @param direction
+     * @param enemyTankList
+     * @param obstacleList
+     *
      */
     void move(int direction, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleList);
 
