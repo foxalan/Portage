@@ -13,7 +13,7 @@ import com.example.fox_ui.tankgame.view.GamePanel;
  * Issue :1线程冲突，导致两个线程修改一个变量
  */
 
-public class TankFragment extends LatteDelegate implements View.OnClickListener{
+public class TankFragment extends LatteDelegate implements View.OnClickListener {
 
     private GamePanel gamePanel;
 
@@ -31,12 +31,7 @@ public class TankFragment extends LatteDelegate implements View.OnClickListener{
         rootView.findViewById(R.id.btn_move_left).setOnClickListener(this);
         rootView.findViewById(R.id.btn_move_right).setOnClickListener(this);
         rootView.findViewById(R.id.btn_bullet).setOnClickListener(this);
-
-        gamePanel.startGame();
-
-
-
-
+        rootView.findViewById(R.id.btn_start_game).setOnClickListener(this);
     }
 
     @Override
@@ -50,10 +45,10 @@ public class TankFragment extends LatteDelegate implements View.OnClickListener{
             gamePanel.moveLeft();
         } else if (i == R.id.btn_move_right) {
             gamePanel.moveRight();
-        } else if(i == R.id.btn_bullet){
+        } else if (i == R.id.btn_bullet) {
             gamePanel.shutBullet();
-        } else{
-
+        } else if (i == R.id.btn_start_game) {
+            gamePanel.startGame();
         }
     }
 }

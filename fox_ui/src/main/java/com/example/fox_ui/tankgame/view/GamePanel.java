@@ -142,7 +142,9 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
 
     private void drawBullets(Canvas canvas) {
         for (Bullet bullet : mBulletList) {
-            bullet.drawBullet(canvas, mHeroPaint);
+            if (bullet!=null){
+                bullet.drawBullet(canvas, mHeroPaint);
+            }
         }
     }
 

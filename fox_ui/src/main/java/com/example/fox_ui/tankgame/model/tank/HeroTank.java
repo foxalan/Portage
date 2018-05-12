@@ -58,6 +58,9 @@ public class HeroTank extends Tank {
 
     @Override
     public void move(int direction) {
+        if (!isAlive()){
+            return;
+        }
         //1.设置方向 2.改变坐标
         switch (direction) {
             case TANK_DIRECTION_UP:
@@ -89,34 +92,38 @@ public class HeroTank extends Tank {
 
     @Override
     public Bullet shoutBullet() {
+        if (isAlive()){
 
-        Bullet bullet = new Bullet();
-        bullet.setDir(getDirection());
-        bullet.setExist(true);
-        switch (getDirection()) {
-            case TANK_DIRECTION_UP:
-                bullet.setPositionY(getPositionY() - dev);
-                bullet.setPositionX(getPositionX() );
-                break;
-            case TANK_DIRECTION_DOWN:
-                bullet.setPositionY(getPositionY() + dev);
-                bullet.setPositionX(getPositionX());
-                break;
-            case TANK_DIRECTION_LEFT:
-                bullet.setPositionY(getPositionY());
-                bullet.setPositionX(getPositionX() - dev);
-                break;
-            case TANK_DIRECTION_RIGHT:
-                bullet.setPositionY(getPositionY());
-                bullet.setPositionX(getPositionX() + dev);
-                break;
-            default:
-                break;
+            Bullet bullet = new Bullet();
+            bullet.setDir(getDirection());
+            bullet.setExist(true);
+            switch (getDirection()) {
+                case TANK_DIRECTION_UP:
+                    bullet.setPositionY(getPositionY() - dev);
+                    bullet.setPositionX(getPositionX() );
+                    break;
+                case TANK_DIRECTION_DOWN:
+                    bullet.setPositionY(getPositionY() + dev);
+                    bullet.setPositionX(getPositionX());
+                    break;
+                case TANK_DIRECTION_LEFT:
+                    bullet.setPositionY(getPositionY());
+                    bullet.setPositionX(getPositionX() - dev);
+                    break;
+                case TANK_DIRECTION_RIGHT:
+                    bullet.setPositionY(getPositionY());
+                    bullet.setPositionX(getPositionX() + dev);
+                    break;
+                default:
+                    break;
 
+            }
+
+            bullet.setType(Constant.BULLET_TYPE_HERO);
+            return bullet;
         }
 
-        bullet.setType(Constant.BULLET_TYPE_HERO);
-        return bullet;
+        return null;
     }
 
     private void drawTankUp(Canvas canvas, Paint paint) {

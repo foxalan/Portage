@@ -33,27 +33,27 @@ public abstract class Obstacle implements IObstacleListener{
         isAlive = alive;
     }
 
-    public int getmPositionX() {
+    public int getPositionX() {
         return mPositionX;
     }
 
-    public void setmPositionX(int mPositionX) {
+    public void setPositionX(int mPositionX) {
         this.mPositionX = mPositionX;
     }
 
-    public int getmPositionY() {
+    public int getPositionY() {
         return mPositionY;
     }
 
-    public void setmPositionY(int mPositionY) {
+    public void setPositionY(int mPositionY) {
         this.mPositionY = mPositionY;
     }
 
-    public int getmType() {
+    public int getType() {
         return mType;
     }
 
-    public void setmType(int mType) {
+    public void setType(int mType) {
         this.mType = mType;
     }
 }

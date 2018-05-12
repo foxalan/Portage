@@ -2,7 +2,6 @@ package com.example.fox_ui.tankgame.presenter;
 
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.view.View;
 
 import com.example.fox_ui.tankgame.constant.Constant;
 import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
@@ -94,9 +93,9 @@ public class PresenterGameViewImpl implements IPresenterGameView {
             for(int j = 30 ; j< 45;j++){
                 ObstacleWood wood = new ObstacleWood();
                 wood.setAlive(true);
-                wood.setmPositionX(i);
-                wood.setmPositionY(j);
-                wood.setmType(Constant.OBSTACLE_TYPE_EASY_DES);
+                wood.setPositionX(i);
+                wood.setPositionY(j);
+                wood.setType(Constant.OBSTACLE_TYPE_EASY_DES);
                 obstacleWoods.add(wood);
             }
         }

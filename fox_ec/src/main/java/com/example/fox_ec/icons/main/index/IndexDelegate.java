@@ -1,5 +1,7 @@
 package com.example.fox_ec.icons.main.index;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.fox_core.delegate.bottom.BottomItemDelegate;
@@ -21,5 +23,10 @@ public class IndexDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(View rootView) throws Exception {
 
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
     }
 }

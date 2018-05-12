@@ -27,8 +27,8 @@ public class ObstacleWood extends Obstacle{
     @Override
     public void draw(Canvas canvas, Paint paint) {
         if (isAlive()){
-            int x = (getmPositionX() - 1);
-            int y = (getmPositionY() - 1);
+            int x = (getPositionX() - 1);
+            int y = (getPositionY() - 1);
             Rect rect = new Rect(x * RECT_LENGTH, y * RECT_LENGTH, (x + 1) * RECT_LENGTH, (y + 1) * RECT_LENGTH);
             canvas.drawRect(rect, paint);
         }

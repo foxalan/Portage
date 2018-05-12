@@ -89,7 +89,7 @@ public class Bullet implements IBulletListener {
     @Override
     public void move(List<EnemyTank> enemyTankList, HeroTank heroTank, List<ObstacleWood> obstacleWoodList) {
 
-        if(!isExist()){
+        if (!isExist()) {
             return;
         }
 
@@ -98,7 +98,7 @@ public class Bullet implements IBulletListener {
             return;
         }
 
-        if (isExist()){
+        if (isExist()) {
 
             switch (getDir()) {
                 case TANK_DIRECTION_UP:
@@ -129,12 +129,12 @@ public class Bullet implements IBulletListener {
             setExist(false);
             return false;
         }
-        for(int i =0;i<obstacleWoodList.size();i++){
-            if(!obstacleWoodList.get(i).isAlive()){
+        for (int i = 0; i < obstacleWoodList.size(); i++) {
+            if (!obstacleWoodList.get(i).isAlive()) {
                 continue;
             }
-            if (obstacleWoodList.get(i).getmPositionX()==getPositionX()){
-                if (obstacleWoodList.get(i).getmPositionY() == getPositionY()){
+            if (obstacleWoodList.get(i).getPositionX() == getPositionX()) {
+                if (obstacleWoodList.get(i).getPositionY() == getPositionY()) {
                     obstacleWoodList.get(i).setAlive(false);
                     setExist(false);
                 }
@@ -142,14 +142,14 @@ public class Bullet implements IBulletListener {
         }
 
         if (getType() == Constant.BULLET_TYPE_Enemy) {
-            if (!heroTank.isAlive()){
+            if (!heroTank.isAlive()) {
                 return true;
             }
             setTouch(heroTank);
 
-        }else if(getType() == Constant.BULLET_TYPE_HERO){
-            for(int i =0;i<enemyTankList.size();i++){
-                if (!enemyTankList.get(i).isAlive()){
+        } else if (getType() == Constant.BULLET_TYPE_HERO) {
+            for (int i = 0; i < enemyTankList.size(); i++) {
+                if (!enemyTankList.get(i).isAlive()) {
                     continue;
                 }
                 setTouch(enemyTankList.get(i));
@@ -160,13 +160,15 @@ public class Bullet implements IBulletListener {
 
     /**
      * 检测碰撞
+     *
      * @param heroTank
      */
     int magic = 2;
-    private void setTouch(Tank heroTank){
+
+    private void setTouch(Tank heroTank) {
         switch (getDir()) {
             case TANK_DIRECTION_UP:
-                if (Math.abs(getPositionX()-heroTank.getPositionX())==magic) {
+                if (Math.abs(getPositionX() - heroTank.getPositionX()) == magic) {
                     if ((getPositionY() - 1) == heroTank.getPositionY()) {
                         L.e(getDir() + "====" + getPositionY() + "=====" + heroTank.getPositionY());
                         setExist(false);
