@@ -3,7 +3,11 @@ package com.example.fox_ui.tankgame.model.tank;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import com.example.fox_ui.tankgame.model.Obstacle.Obstacle;
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
+
+import java.util.List;
 
 /**
  * @Author Alan
@@ -26,7 +30,7 @@ public interface ITankListener {
      * 坦克的移动
      * @param direction
      */
-    void move(int direction);
+    void move(int direction, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleList);
 
     /**
      * 发射子弹

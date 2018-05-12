@@ -142,7 +142,7 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
 
     private void drawBullets(Canvas canvas) {
         for (Bullet bullet : mBulletList) {
-            if (bullet!=null){
+            if (bullet != null) {
                 bullet.drawBullet(canvas, mHeroPaint);
             }
         }
@@ -179,25 +179,25 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
      */
     @Override
     public void moveUp() {
-        mHeroTank.move(TANK_DIRECTION_UP);
+        mHeroTank.move(TANK_DIRECTION_UP, mEnemyTankList, mObstacleWoodList);
         invalidate();
     }
 
     @Override
     public void moveDown() {
-        mHeroTank.move(TANK_DIRECTION_DOWN);
+        mHeroTank.move(TANK_DIRECTION_DOWN, mEnemyTankList, mObstacleWoodList);
         invalidate();
     }
 
     @Override
     public void moveLeft() {
-        mHeroTank.move(TANK_DIRECTION_LEFT);
+        mHeroTank.move(TANK_DIRECTION_LEFT, mEnemyTankList, mObstacleWoodList);
         invalidate();
     }
 
     @Override
     public void moveRight() {
-        mHeroTank.move(TANK_DIRECTION_RIGHT);
+        mHeroTank.move(TANK_DIRECTION_RIGHT, mEnemyTankList, mObstacleWoodList);
         invalidate();
     }
 
@@ -212,7 +212,10 @@ public class GamePanel extends View implements ITankControlListener, IGameContro
     public void shutBullet() {
         currentTimeMillis = System.currentTimeMillis();
         if ((currentTimeMillis - lastTimeMills) >= intervalTime) {
-            mBulletList.add(mHeroTank.shoutBullet());
+            Bullet bullet = mHeroTank.shoutBullet();
+            if (bullet != null) {
+                mBulletList.add(bullet);
+            }
             lastTimeMills = currentTimeMillis;
         }
     }

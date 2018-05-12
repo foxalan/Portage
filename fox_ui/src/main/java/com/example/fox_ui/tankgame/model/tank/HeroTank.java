@@ -7,7 +7,11 @@ import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
 import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.Obstacle.Obstacle;
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
+
+import java.util.List;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
@@ -57,10 +61,17 @@ public class HeroTank extends Tank {
     }
 
     @Override
-    public void move(int direction) {
-        if (!isAlive()){
+    public void move(int direction, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleList) {
+
+
+        if (!isAlive()) {
             return;
         }
+
+        if (isCanMove(direction, enemyTankList, obstacleList)) {
+            return;
+        }
+
         //1.设置方向 2.改变坐标
         switch (direction) {
             case TANK_DIRECTION_UP:
@@ -88,11 +99,102 @@ public class HeroTank extends Tank {
         }
     }
 
+    /**
+     * 判断是否可以移动
+     *
+     * @param enemyTankList
+     * @param obstacleList
+     * @return
+     */
+    private int len = 2;
+
+    private boolean isCanMove(int dir, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleList) {
+
+
+        switch (dir) {
+            case TANK_DIRECTION_DOWN:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionX() == getPositionX()) {
+                        if ((enemyTank.getPositionY() - getPositionY()) == len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionX() == getPositionX()) {
+                        if ((wood.getPositionY() - getPositionY()) == len) {
+                            return false;
+                        }
+                    }
+                }
+
+                break;
+            case TANK_DIRECTION_UP:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionX() == getPositionX()) {
+                        if ((enemyTank.getPositionY() - getPositionY()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionX() == getPositionX()) {
+                        if ((wood.getPositionY() - getPositionY()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+                break;
+
+            case TANK_DIRECTION_LEFT:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionY() == getPositionY()) {
+                        if ((enemyTank.getPositionX() - getPositionX()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionY() == getPositionY()) {
+                        if ((wood.getPositionX() - getPositionX()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+                break;
+
+            case TANK_DIRECTION_RIGHT:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionY() == getPositionY()) {
+                        if ((enemyTank.getPositionX() - getPositionX()) == len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionY() == getPositionY()) {
+                        if ((wood.getPositionX() - getPositionX()) == len) {
+                            return false;
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
     private int dev = 1;
 
     @Override
     public Bullet shoutBullet() {
-        if (isAlive()){
+        if (isAlive()) {
 
             Bullet bullet = new Bullet();
             bullet.setDir(getDirection());
@@ -100,7 +202,7 @@ public class HeroTank extends Tank {
             switch (getDirection()) {
                 case TANK_DIRECTION_UP:
                     bullet.setPositionY(getPositionY() - dev);
-                    bullet.setPositionX(getPositionX() );
+                    bullet.setPositionX(getPositionX());
                     break;
                 case TANK_DIRECTION_DOWN:
                     bullet.setPositionY(getPositionY() + dev);

@@ -6,7 +6,10 @@ import android.graphics.Rect;
 
 import com.example.fox_core.util.L;
 import com.example.fox_ui.tankgame.constant.Constant;
+import com.example.fox_ui.tankgame.model.Obstacle.ObstacleWood;
 import com.example.fox_ui.tankgame.model.bullet.Bullet;
+
+import java.util.List;
 
 import static com.example.fox_ui.tankgame.constant.Constant.RECT_LENGTH;
 import static com.example.fox_ui.tankgame.constant.Constant.TANK_DIRECTION_DOWN;
@@ -54,15 +57,23 @@ public class EnemyTank extends Tank {
     }
 
     @Override
-    public void move(int direction) {
+    public void move(int direction, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleList) {
 
+        //是否存活
         if (!isAlive()) {
             return;
         }
 
+        //是否出界
         if (!canMove(direction)) {
             return;
         }
+
+        if (isCanMove(direction,enemyTankList,obstacleList)){
+            return;
+        }
+
+
         switch (direction) {
             case TANK_DIRECTION_UP:
                 setDirection(TANK_DIRECTION_UP);
@@ -120,6 +131,89 @@ public class EnemyTank extends Tank {
             return bullet;
         }
         return null;
+    }
+
+    private int len = 2;
+    private boolean isCanMove(int dir, List<EnemyTank> enemyTankList, List<ObstacleWood> obstacleList) {
+
+
+        switch (dir) {
+            case TANK_DIRECTION_DOWN:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionX() == getPositionX()) {
+                        if ((enemyTank.getPositionY() - getPositionY()) == len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionX() == getPositionX()) {
+                        if ((wood.getPositionY() - getPositionY()) == len) {
+                            return false;
+                        }
+                    }
+                }
+
+                break;
+            case TANK_DIRECTION_UP:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionX() == getPositionX()) {
+                        if ((enemyTank.getPositionY() - getPositionY()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionX() == getPositionX()) {
+                        if ((wood.getPositionY() - getPositionY()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+                break;
+
+            case TANK_DIRECTION_LEFT:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionY() == getPositionY()) {
+                        if ((enemyTank.getPositionX() - getPositionX()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionY() == getPositionY()) {
+                        if ((wood.getPositionX() - getPositionX()) == -len) {
+                            return false;
+                        }
+                    }
+                }
+                break;
+
+            case TANK_DIRECTION_RIGHT:
+                for (EnemyTank enemyTank : enemyTankList) {
+                    if (enemyTank.getPositionY() == getPositionY()) {
+                        if ((enemyTank.getPositionX() - getPositionX()) == len) {
+                            return false;
+                        }
+                    }
+                }
+
+                for(ObstacleWood wood:obstacleList){
+                    if (wood.getPositionY() == getPositionY()) {
+                        if ((wood.getPositionX() - getPositionX()) == len) {
+                            return false;
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 
     private boolean canMove(int dir) {

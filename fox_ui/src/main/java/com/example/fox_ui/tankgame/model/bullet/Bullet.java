@@ -93,6 +93,8 @@ public class Bullet implements IBulletListener {
             return;
         }
 
+
+
         //判断移动
         if (!isTouch(enemyTankList, heroTank, obstacleWoodList)) {
             return;
@@ -129,6 +131,7 @@ public class Bullet implements IBulletListener {
             setExist(false);
             return false;
         }
+        //障碍物的碰撞
         for (int i = 0; i < obstacleWoodList.size(); i++) {
             if (!obstacleWoodList.get(i).isAlive()) {
                 continue;
