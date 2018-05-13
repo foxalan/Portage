@@ -72,7 +72,7 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
         } else if (getLayout() instanceof View) {
             rootView = (View) getLayout();
         }else {
-            throw new RuntimeException("the rootView type is error");
+             throw new RuntimeException("the rootView type is error");
         }
 
         if (rootView != null) {

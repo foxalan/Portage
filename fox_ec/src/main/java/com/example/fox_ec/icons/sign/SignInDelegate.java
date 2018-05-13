@@ -3,7 +3,9 @@ package com.example.fox_ec.icons.sign;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.fox_core.app.Latte;
 import com.example.fox_core.fragment.LatteDelegate;
 import com.example.fox_ec.R;
 import com.example.fox_ec.icons.main.EcBottomDelegate;
@@ -87,6 +89,7 @@ public class SignInDelegate extends LatteDelegate implements IViewSignCallBack{
     @Override
     public void onError() {
         setErrorNull();
+        Toast.makeText(Latte.getApplicationContext(),"用户名或密码错误，请重新再试试",Toast.LENGTH_SHORT).show();
 
     }
 

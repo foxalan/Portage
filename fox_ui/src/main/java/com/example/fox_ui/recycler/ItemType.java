@@ -1,10 +1,7 @@
 package com.example.fox_ui.recycler;
 
 /**
- * @Author Alan
- * Date 2018/5/12 0012
- * Function
- * Issue
+ * Created by 傅令杰
  */
 
 public class ItemType {
