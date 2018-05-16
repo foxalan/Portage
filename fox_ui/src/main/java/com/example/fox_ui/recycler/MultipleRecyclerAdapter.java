@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.fox_ui.R;
+import com.example.fox_ui.banner.BannerCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +108,7 @@ public class MultipleRecyclerAdapter extends
                 if (!mIsInitBanner) {
                     bannerImages = entity.getField(MultipleFields.BANNERS);
                     final ConvenientBanner<String> convenientBanner = holder.getView(R.id.banner_recycler_item);
-                //    BannerCreator.setDefault(convenientBanner, bannerImages, this);
+                    BannerCreator.setDefault(convenientBanner, bannerImages, this);
                     mIsInitBanner = true;
                 }
                 break;

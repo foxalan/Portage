@@ -49,5 +49,7 @@ dependencies {
     //auto
     provided 'com.google.auto.value:auto-value:1.4.1'
     annotationProcessor "com.google.auto.value:auto-value:1.4.1"
+    //JSON依赖Android版
+    compile 'com.alibaba:fastjson:1.1.57.android'
 
 }
