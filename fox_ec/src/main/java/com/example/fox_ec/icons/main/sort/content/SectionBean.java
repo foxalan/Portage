@@ -1,6 +1,7 @@
 package com.example.fox_ec.icons.main.sort.content;
 
 
+import com.chad.library.adapter.base.entity.SectionEntity;
 
 /**
  * Created by 傅令杰

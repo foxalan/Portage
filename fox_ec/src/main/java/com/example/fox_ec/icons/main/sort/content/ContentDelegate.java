@@ -11,6 +11,8 @@ import com.example.fox_core.net.RestClient;
 import com.example.fox_core.net.callback.ISuccess;
 import com.example.fox_ec.R;
 
+import java.util.List;
+
 /**
  * @Author Alan
  * Date 2018/5/22 0022
@@ -22,7 +24,7 @@ public class ContentDelegate extends LatteDelegate {
 
     private static final String ARG_CONTENT_ID = "CONTENT_ID";
     private int mContentId = -1;
-
+    private List<SectionBean> mData = null;
 
     RecyclerView mRecyclerView = null;
 
@@ -72,11 +74,11 @@ public class ContentDelegate extends LatteDelegate {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-//                        mData = new SectionDataConverter().convert(response);
-//                        final SectionAdapter sectionAdapter =
-//                                new SectionAdapter(R.layout.item_section_content,
-//                                        R.layout.item_section_header, mData);
-//                        mRecyclerView.setAdapter(sectionAdapter);
+                        mData = new SectionDataConverter().convert(response);
+                        final SectionAdapter sectionAdapter =
+                                new SectionAdapter(R.layout.item_section_content,
+                                        R.layout.item_section_header, mData);
+                        mRecyclerView.setAdapter(sectionAdapter);
                     }
                 })
                 .build()
