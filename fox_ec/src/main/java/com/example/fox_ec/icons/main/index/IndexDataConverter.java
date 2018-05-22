@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Issue
  */
 
-public class IndexDataConver extends DataConverter {
+public class IndexDataConverter extends DataConverter {
     @Override
     public ArrayList<MultipleItemEntity> convert() {
         return null;

@@ -8,7 +8,6 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.fox_core.delegate.bottom.BottomItemDelegate;
 import com.example.fox_ec.R;
@@ -43,7 +42,7 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
         mRecyclerView = rootView.findViewById(R.id.ryc_index);
         mSearchView = rootView.findViewById(R.id.et_search_view);
 
-        mRefreshHandler = RefreshHandler.create(mSwipeRefreshLayout, mRecyclerView, new IndexDataConver());
+        mRefreshHandler = RefreshHandler.create(mSwipeRefreshLayout, mRecyclerView, new IndexDataConverter());
 
         mSearchView.setOnFocusChangeListener(this);
     }

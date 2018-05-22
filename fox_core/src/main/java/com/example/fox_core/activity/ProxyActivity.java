@@ -20,7 +20,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Issue
  */
 
-public abstract class ProxyActivity  extends AppCompatActivity implements ISupportActivity {
+public abstract class ProxyActivity extends AppCompatActivity implements ISupportActivity {
 
     /**
      * 设置第一个Delegate

@@ -22,6 +22,8 @@ public class RefreshHandler implements
         SwipeRefreshLayout.OnRefreshListener
         , BaseQuickAdapter.RequestLoadMoreListener {
 
+
+
     private final SwipeRefreshLayout REFRESH_LAYOUT;
     private final PagingBean BEAN;
     private final RecyclerView RECYCLERVIEW;
