@@ -55,9 +55,9 @@ public class VerticalListDelegate extends LatteDelegate {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        final List<MultipleItemEntity> data =
-                                new VerticalListDataConverter().setJsonData(response).convert();
-                        final SortDelegate delegate = getParentDelegate();
+//                        final List<MultipleItemEntity> data =
+//                                new VerticalListDataConverter().setJsonData(response).convert();
+//                        final SortDelegate delegate = getParentDelegate();
                     //    final SortRecyclerAdapter adapter = new SortRecyclerAdapter(data, delegate);
                     //    mRecyclerView.setAdapter(adapter);
 

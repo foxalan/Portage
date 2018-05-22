@@ -4,7 +4,9 @@ import android.app.Application;
 import android.os.Handler;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.example.administrator.protage.R;
 import com.example.fox_core.app.Latte;
+import com.example.fox_core.net.interceptors.DebugInterceptor;
 import com.example.fox_ec.icons.FontEcModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
@@ -33,12 +35,13 @@ public class FoxApp extends Application {
         //SDKInitializer.initialize(getApplicationContext());
 
         Latte.init()
-                .withApiHost("本地服务器")
+                .withApiHost("http://www.heep.com")
                 .withContext(this)
                 .withHandler(HANDLER)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
                 .withLoaderDelayed(1000)
+                .withInterceptor(new DebugInterceptor("test", R.raw.test))
                 .configure();
 
     }
