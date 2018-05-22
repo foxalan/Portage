@@ -1,7 +1,5 @@
 package com.example.fox_core.delegate.bottom;
 
-import com.joanzapata.iconify.widget.IconTextView;
-
 /**
  * @Author Alan
  * Date 2018/5/10 0010

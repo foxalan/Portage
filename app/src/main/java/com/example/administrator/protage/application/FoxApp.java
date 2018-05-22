@@ -16,6 +16,10 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
  *       2.Fragment没有完善
  *       3.网络请求没有完善
  *       4.用户登入，注册模块
+ *       5.webView不是很完善
+ *       6.分类点击
+ *
+ *       
  */
 
 public class FoxApp extends Application {

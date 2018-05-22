@@ -1,6 +1,5 @@
 package com.example.fox_core.delegate.bottom;
 
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.fox_core.R;

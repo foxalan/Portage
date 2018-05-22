@@ -6,7 +6,6 @@ import android.webkit.WebViewClient;
 
 import com.example.fox_core.web.IPageLoadListener;
 import com.example.fox_core.web.WebDelegate;
-import com.example.fox_core.web.WebViewDelegateImpl;
 import com.example.fox_core.web.rount.Router;
 
 /**

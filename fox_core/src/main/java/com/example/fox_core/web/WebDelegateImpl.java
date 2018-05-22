@@ -1,11 +1,14 @@
 package com.example.fox_core.web;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.fox_core.fragment.LatteDelegate;
 import com.example.fox_core.web.chromeclient.WebViewChromeClientImpl;
 import com.example.fox_core.web.client.WebViewClientImpl;
 import com.example.fox_core.web.rount.RouteKey;
@@ -18,15 +21,16 @@ import com.example.fox_core.web.rount.Router;
  * Issue
  */
 
-public class WebViewDelegateImpl extends WebDelegate {
+public class WebDelegateImpl extends WebDelegate {
 
-    public static WebViewDelegateImpl webViewDelegate;
+    public static WebDelegateImpl webViewDelegate;
 
+    private LatteDelegate mTopDelegate = null;
 
-    public static WebViewDelegateImpl create(String mUrl){
+    public static WebDelegateImpl create(String mUrl){
         if (webViewDelegate == null){
 
-            webViewDelegate = new WebViewDelegateImpl();
+            webViewDelegate = new WebDelegateImpl();
         }
         Bundle bundle = new Bundle();
         bundle.putString(RouteKey.URL.name(),mUrl);
@@ -35,6 +39,7 @@ public class WebViewDelegateImpl extends WebDelegate {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public WebView initWebView(WebView webView) {
         return new WebViewImpl().createWebView(webView);
@@ -42,9 +47,6 @@ public class WebViewDelegateImpl extends WebDelegate {
 
     @Override
     public WebViewClient initWebViewClient() {
-
-
-
         return new WebViewClientImpl(this);
     }
 
@@ -68,5 +70,16 @@ public class WebViewDelegateImpl extends WebDelegate {
     @Override
     public IWebViewInitializer getWebViewInit() {
         return this;
+    }
+
+    public void setTopDelegate(LatteDelegate delegate) {
+        mTopDelegate = delegate;
+    }
+
+    public LatteDelegate getTopDelegate() {
+        if (mTopDelegate == null) {
+            mTopDelegate = this;
+        }
+        return mTopDelegate;
     }
 }
