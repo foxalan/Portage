@@ -38,6 +38,8 @@ public class LockScreenView extends View {
     public LockScreenView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+
+        setFocusable(true);
         initPaints();
     }
 
@@ -114,16 +116,6 @@ public class LockScreenView extends View {
                 break;
         }
         return super.onTouchEvent(event);
-    }
-
-
-    /**
-     * 检查
-     */
-    public void checkLockResult(){
-
-
-
     }
 
 }
