@@ -6,7 +6,6 @@ import android.view.MotionEvent;
 
 import com.example.fox_ui.screenlock.model.Point;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,13 +15,13 @@ import java.util.List;
  * Issue :
  */
 
-public class LockHandler<T> {
-
-    private List<T> mCurrentLockList = new ArrayList<>();
-    private List<T> mPassWordLockList = new ArrayList<>();
+public class LockHandler {
 
 
 
+    public LockHandler(){
+
+    }
 
 
     /**
