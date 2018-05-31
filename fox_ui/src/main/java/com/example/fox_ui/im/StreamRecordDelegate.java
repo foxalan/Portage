@@ -29,7 +29,7 @@ public class StreamRecordDelegate extends LatteDelegate {
 
     private static final String TAG = "stream record ";
     private Button mBtSteam;
-    private boolean isRecording = false;
+    private volatile boolean isRecording = false;
     private ExecutorService mExecutorService;
 
     private File mAutoFile;

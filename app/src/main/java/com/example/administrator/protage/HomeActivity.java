@@ -46,8 +46,8 @@ public class HomeActivity extends PermissionsActivity {
 
         // return new LauncherScrollDelegate();
         // return new EcBottomDelegate();
-        // return new MediaRecordDelegate();
-        return new StreamRecordDelegate();
+         return new MediaRecordDelegate();
+        // return new StreamRecordDelegate();
     }
 
     @Override

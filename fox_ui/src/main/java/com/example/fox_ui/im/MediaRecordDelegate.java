@@ -1,5 +1,6 @@
 package com.example.fox_ui.im;
 
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.provider.Settings;
@@ -23,9 +24,12 @@ import java.util.concurrent.Executors;
  */
 
 public class MediaRecordDelegate extends LatteDelegate {
+
     private static final String TAG = "Record";
     private TextView mTvRecord;
     private Button mBtnListen;
+    private TextView mTvResult;
+
     private int state = 0;
 
     private ExecutorService mExecutorService;
@@ -37,6 +41,9 @@ public class MediaRecordDelegate extends LatteDelegate {
     private long startRecordTime;
     private long stopRecordTime;
 
+    private boolean isPlaying;
+    private MediaPlayer mMediaPlayer;
+
     @Override
     public Object getLayout() {
         return R.layout.delegate_im_recoder_file;
@@ -47,6 +54,7 @@ public class MediaRecordDelegate extends LatteDelegate {
 
         mTvRecord = rootView.findViewById(R.id.tv_recoder_file);
         mBtnListen = rootView.findViewById(R.id.bt_listen);
+        mTvResult = rootView.findViewById(R.id.tv_result);
 
         mExecutorService = Executors.newSingleThreadExecutor();
 
@@ -72,6 +80,75 @@ public class MediaRecordDelegate extends LatteDelegate {
                 return true;
             }
         });
+
+        mBtnListen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //检查是否正在播放
+                if (!isPlaying){
+                    //检查文件是否存在
+                    if (mAudioFile!=null){
+                        //初始化MediaPlayer
+                        mExecutorService.submit(new Runnable() {
+                            @Override
+                            public void run() {
+                                playRecord(mAudioFile);
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    /**
+     * 播放失败
+     */
+    private void playFail() {
+       L.e(TAG,"播放失败");
+       isPlaying = false;
+       releaseMediaPlayer();
+
+    }
+
+
+    private void playRecord(File mAudioFile) {
+
+        try {
+            //初始化MediaPlayer
+            mMediaPlayer = new MediaPlayer();
+            mMediaPlayer.setDataSource(mAudioFile.getAbsolutePath());
+
+            //设置回调
+            mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    L.e(TAG,"play completion");
+                    isPlaying = false;
+                }
+            });
+
+            mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                    playFail();
+                    return false;
+                }
+            });
+
+            //设置声道，循环
+            mMediaPlayer.setLooping(false);
+            mMediaPlayer.setVolume(1,1);
+
+            mMediaPlayer.prepare();
+            mMediaPlayer.start();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -131,6 +208,8 @@ public class MediaRecordDelegate extends LatteDelegate {
         mMediaRecorder.stop();
         //2.记录时间
         stopRecordTime = System.currentTimeMillis();
+        int time = (int) ((stopRecordTime-startRecordTime)/1000);
+        mTvResult.setText(String.valueOf("录制成功"+time+"s"));
         return false;
     }
 
@@ -222,5 +301,20 @@ public class MediaRecordDelegate extends LatteDelegate {
         super.onDestroy();
         mExecutorService.shutdown();
         releaseRecord();
+
+        releaseMediaPlayer();
+
+
+    }
+
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer!=null){
+            mMediaPlayer.setOnErrorListener(null);
+            mMediaPlayer.setOnCompletionListener(null);
+
+            mMediaPlayer.stop();
+            mMediaPlayer.reset();
+            mMediaPlayer.release();
+        }
     }
 }
