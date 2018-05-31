@@ -35,7 +35,7 @@ public class FoxApp extends Application {
         //SDKInitializer.initialize(getApplicationContext());
 
         Latte.init()
-                .withApiHost("http://www.heep.com")
+                .withApiHost("")
                 .withContext(this)
                 .withHandler(HANDLER)
                 .withIcon(new FontAwesomeModule())

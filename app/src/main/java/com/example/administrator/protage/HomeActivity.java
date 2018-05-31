@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 
 import com.example.fox_core.fragment.LatteDelegate;
+import com.example.fox_ec.icons.main.EcBottomDelegate;
 import com.example.fox_ui.im.MediaRecordDelegate;
 import com.example.fox_ui.im.StreamRecordDelegate;
 
@@ -45,8 +46,8 @@ public class HomeActivity extends PermissionsActivity {
         // return new TankFragment();
 
         // return new LauncherScrollDelegate();
-        // return new EcBottomDelegate();
-         return new MediaRecordDelegate();
+         return new EcBottomDelegate();
+        // return new MediaRecordDelegate();
         // return new StreamRecordDelegate();
     }
 

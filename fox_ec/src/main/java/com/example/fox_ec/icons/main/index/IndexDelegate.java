@@ -74,7 +74,7 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
         initRefreshLayout();
         initRecyclerView();
 
-        mRefreshHandler.firstPage("index.php");
+        //mRefreshHandler.firstPage("index.php");
     }
 
     @Override
