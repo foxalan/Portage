@@ -6,8 +6,10 @@ import com.example.fox_core.delegate.bottom.BaseBottomDelegate;
 import com.example.fox_core.delegate.bottom.BottomItemDelegate;
 import com.example.fox_core.delegate.bottom.BottomTabBean;
 import com.example.fox_core.delegate.bottom.ItemBuilder;
+import com.example.fox_ec.icons.main.cart.ShopCartDelegate;
 import com.example.fox_ec.icons.main.discover.DiscoverDelegate;
 import com.example.fox_ec.icons.main.index.IndexDelegate;
+import com.example.fox_ec.icons.main.personal.PersonalDelegate;
 import com.example.fox_ec.icons.main.sort.SortDelegate;
 
 import java.util.LinkedHashMap;
@@ -41,8 +43,8 @@ public class EcBottomDelegate extends BaseBottomDelegate {
         items.put(new BottomTabBean("{fa-compass}", "发现"), new DiscoverDelegate());
      //   items.put(new BottomTabBean("{fa-home}", "主页"), new IndexDelegate());
      //   items.put(new BottomTabBean("{fa-home}", "主页"), new IndexDelegate());
-//        items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());
-//        items.put(new BottomTabBean("{fa-user}", "我的"), new PersonalDelegate());
+        items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());
+        items.put(new BottomTabBean("{fa-user}", "我的"), new PersonalDelegate());
         return builder.addItems(items).build();
     }
 }

@@ -2,6 +2,7 @@ package com.example.fox_ec.icons.main.personal;
 
 /**
  * Created by 傅令杰
+ *
  */
 
 public class ListItemType {

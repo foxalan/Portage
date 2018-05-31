@@ -19,7 +19,8 @@ public abstract class BottomItemDelegate extends LatteDelegate {
      * 两次点击的间隔
      */
     private static final long WAIT_TIME = 2000L;
-    private long TOUCH_TIME = 0;
+    private static long TOUCH_TIME = 0;
+
     @Override
     public boolean onBackPressedSupport() {
 
