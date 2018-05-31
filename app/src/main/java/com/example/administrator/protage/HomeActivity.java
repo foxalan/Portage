@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 
 import com.example.fox_core.fragment.LatteDelegate;
 import com.example.fox_ui.im.MediaRecordDelegate;
+import com.example.fox_ui.im.StreamRecordDelegate;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -36,12 +37,17 @@ public class HomeActivity extends PermissionsActivity {
     public LatteDelegate setRootDelegate() {
 
         //请求读写权限
-        requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE}, 0x0002);
+        requestPermission(
+                new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.RECORD_AUDIO}, 0x0002);
         // return new TankFragment();
 
         // return new LauncherScrollDelegate();
         // return new EcBottomDelegate();
-        return new MediaRecordDelegate();
+        // return new MediaRecordDelegate();
+        return new StreamRecordDelegate();
     }
 
     @Override
