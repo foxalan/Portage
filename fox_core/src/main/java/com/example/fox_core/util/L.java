@@ -61,7 +61,8 @@ public class L {
             return null;
         }
 
-        //sb.append(".")// 我电脑的AndroidStudio有点问题，必须在这加个点，在logcat中才能定位。Androidstudio升级后，这个问题不存在了。
+        sb.append(".");
+        // 我电脑的AndroidStudio有点问题，必须在这加个点，在logcat中才能定位。Androidstudio升级后，这个问题不存在了。
         sb.append("(")
                 .append(element.getFileName())
                 .append(":")
